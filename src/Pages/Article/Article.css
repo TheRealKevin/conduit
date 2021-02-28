@@ -1,0 +1,145 @@
+/* Article Header Styling */
+
+.article-header {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 1px solid black; */
+    width: 100%;
+    height: auto;
+}
+
+.article-title-container {
+    font-family: 'Dosis', sans-serif;
+    /* border: 1px solid black; */
+    font-weight: 700;
+    font-size: 150%;
+}
+
+.author-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    padding: 15px;
+    width: 18%;
+    /* border: 1px solid black; */
+}
+
+#author-username {
+    font-family: 'Dosis', sans-serif;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+#author-img {
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+/* Article content Styling */
+
+.seperator-span {
+    margin: 10px;
+    font-weight: 800;
+}
+
+.article-extra {
+    margin: 2%;
+}
+
+.article-container {
+    display: flex;
+    justify-content: center;
+    line-height: 30px;
+    margin: 10px 0px;
+}
+
+.article-content {
+    font-size: 21px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 50%;
+}
+
+.tag-list-container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.tag-list {
+    border: 1px solid black;
+    width: 50%;
+}
+
+.tag-options-container {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-between;
+}
+
+.tag-options {
+    border: 1px solid black;
+    font-family: 'Martel Sans', sans-serif;
+    font-weight: 900;
+    background-color: rgb(242, 242, 242);
+    color: rgba(117, 117, 117, 1);
+    margin: 10px 5px;
+    border-radius: 3px;
+    padding: 2px;
+    width: 15%;
+} 
+
+/* Author footer styling */
+
+.author-container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.author-footer-details {
+    border: 1px solid black;
+    width: 40%;
+}
+
+.author-details-header {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.author-pic-container {
+    /* border: 1px solid black; */
+    padding: 10px;
+}
+
+.author-details-bio-container {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    padding: 10px;
+}
+
+#written {
+    font-family: 'Arimo', sans-serif;
+    padding: 20px;
+}
+
+.author-details-bio {
+    border: 1px solid black
+}
+
+#follow-btn {
+    margin: 20px;
+}
+
+.author-bio-container {
+    border: 1px solid black;
+    color: rgba(117, 117, 117, 1);
+}

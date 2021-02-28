@@ -1,0 +1,37 @@
+.header-container {
+    background-image: url(./back.jpg);
+    background-size: cover;
+    height: 450px;
+}
+
+.intro-content {
+    height: 450px;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#intro-header {
+    font-size: 500%;
+    font-weight: 300;
+    font-family: 'Times New Roman', Times, serif;
+    top: 0px;
+    margin: 0;
+}
+
+#text {
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 55px;
+}
+
+#header-btn {
+    width: 150px;
+    height: 50px;
+    font-size: 15;
+    font-weight: 400;
+    border-radius: 25px;
+    cursor: pointer;
+}

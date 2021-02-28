@@ -1,0 +1,56 @@
+.user-container {
+    width: 30vw;
+    height: 670px;
+    margin-top: 30px;
+    margin-left: 35%;
+    /* height: 600px; */
+    border: 1px solid black;
+}
+
+.username {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 15px 25px;
+    font-size: 35px;
+    font-family: 'Dosis', sans-serif;
+    /* border: 1px solid black; */
+}
+
+#username-header {
+    /* margin: 30px 30px;
+    padding-left: 80px; */
+    margin-left: 20%;
+    /* border: 1px solid black; */
+}
+
+#status {
+    font-size: 20px;
+    bottom: 0px;
+    color: #888;
+    align-self: flex-end;       /* For putting the status in the bottom of the div */
+    padding: 0px 10px;
+}
+
+#user-img {
+    margin-bottom : 10%;
+    width: 50%;
+    height: auto;
+    border: 4px solid black;
+    border-radius: 50%;
+}
+
+.user-info-container {
+    border-top: 1px solid black;
+    padding-top: 35px;
+}  
+
+label {
+    color : #888
+}
+
+.user-info {
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+}

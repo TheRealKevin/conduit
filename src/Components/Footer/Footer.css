@@ -1,0 +1,12 @@
+.footer-container {
+    width: 100%;
+    position: relative;
+    bottom: 0px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+#footer-text {
+    color: #888;
+    font-size: 14px;
+}

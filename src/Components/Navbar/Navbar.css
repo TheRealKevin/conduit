@@ -1,0 +1,27 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-container {
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    padding: 35px;
+    border-bottom: 1px solid black;
+}
+
+.brand {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;
+}
+
+/* ul {
+    float: right;
+} */
+
+.nav-options {
+    font-size: 20px;
+    display: inline;
+    padding: 0px 15px;
+}
