@@ -1,12 +1,13 @@
 import React from 'react';
 import './Article.css';
+import Comment from '../../Components/Comment/Comment';
 
 const Article = () => {
     return(
         <article>
             <div className='article-header'>
                 <div className='article-title-container'>
-                    <h1>Article Title</h1>
+                    <h1>Vibe Cat's Article</h1>
                 </div>
                 <div className='author-info-container'>
                     <div className='author-pic-container'>
@@ -15,15 +16,17 @@ const Article = () => {
                     <div className='author-details'>
                         <div className='author-info'>
                             <h3 id='author-username'>Vibe Cat</h3>
-                            <button id='follow-btn'>Follow</button>
+                            <button className='sign-button' id='follow-btn'>Follow</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className='seperator'>
-                <span className='seperator-span'>.</span>
-                <span className='seperator-span'>.</span>
-                <span className='seperator-span'>.</span>
+                <div className='seperator-container'>
+                    <span className='seperator-span'>.</span>
+                    <span className='seperator-span'>.</span>
+                    <span className='seperator-span'>.</span>
+                </div>
             </div>
             <section>
                 <div className='article-container'>
@@ -64,7 +67,7 @@ const Article = () => {
                         </div>
                         <div className='author-details-bio-container'>
                             <p id='author-username'>Vibe Cat</p>
-                            <button id='follow-btn'>Follow</button>
+                            <button className='sign-button' id='follow-btn'>Follow</button>
                         </div>
                     </div>
                     <div className='author-details-bio'>
@@ -73,6 +76,10 @@ const Article = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='comment-title'>
+                <p id='comment'>Comments</p>
+                <Comment/>
             </div>
         </article>
     );

@@ -2,6 +2,7 @@ import './App.css';
 import Footer from './Components/Footer/Footer';
 import Navbar from './Components/Navbar/Navbar';
 import Article from './Pages/Article/Article';
+import Feed from './Pages/Feed/Feed';
 import Landing from './Pages/Landing/Landing';
 import Signin from './Pages/Signin/Signin';
 import Signup from './Pages/Signup/Signup';
@@ -16,6 +17,7 @@ function App() {
       {/* <Signup/> */}
       {/* <User/> */}
       <Article/>
+      {/* <Feed/> */}
       <Footer/>
     </div>
   );

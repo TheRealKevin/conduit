@@ -12,7 +12,7 @@ const Signup = () => {
             </div>
             <div className='signup-btn'>
                 <a id='signup-btn' href='/'>Sign In</a>
-                <button type='submit'>Sign Up</button>
+                <button className='sign-button' type='submit'>Sign Up</button>
             </div>
         </div>
     );

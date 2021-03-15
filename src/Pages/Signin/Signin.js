@@ -11,7 +11,7 @@ const Signin = () => {
             </div>
             <div className='signin-btn'>
                 <a id='signup-btn' href='/'>Sign Up</a>
-                <button type='submit'>Sign In</button>
+                <button className='sign-button' type='submit'>Sign In</button>
             </div>
         </div>
     );

@@ -35,7 +35,7 @@
     left: 50%;
 }
 
-button {
+.sign-button {
     width: 120px;
     height: 40px;
     border-radius: 5px;
@@ -44,7 +44,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.sign-button:hover {
     transition: 0.2s ease-in-out;
     background-color: black;
     color: white;
