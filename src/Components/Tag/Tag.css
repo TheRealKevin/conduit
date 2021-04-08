@@ -1,0 +1,27 @@
+.tag-list {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    width: 85%;
+}
+
+.tag-options-container {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    list-style: none;
+    /* background-color: orange; */
+}
+
+.tag-options {
+    /* border: 1px solid black; */
+    font-family: 'Martel Sans', sans-serif;
+    font-weight: 900;
+    background-color: rgb(242, 242, 242);
+    color: rgb(99, 93, 93);
+    border: 1px solid rgb(126, 120, 120);
+    margin: 10px 10px;
+    border-radius: 3px;
+    padding: 2px;
+    width: 15%;
+} 

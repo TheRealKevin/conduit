@@ -1,5 +1,7 @@
 import React from 'react';
 import './Comment.css';
+
+import Seperator from '../Seperator/Seperator';
 import Doggo from './doggo.jpg'
 
 const Comment = () => {
@@ -25,11 +27,7 @@ const Comment = () => {
                     </p>
                 </div>
             </div>
-            <div id='comment-seperator' className='seperator'>
-                <span className='seperator-span'>.</span>
-                <span className='seperator-span'>.</span>
-                <span className='seperator-span'>.</span>
-            </div>
+            <Seperator/>
         </div>
     );
 }
