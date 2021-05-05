@@ -4,7 +4,7 @@ import ManagementPreview from '../Management-Preview/Management-Preview';
 import './Article-Management.css';
 
 const db = {
-    article : [
+    articles : [
                     {
                     slug : 'vibe-cats-article',
                     title: 'How to train your dragon',
@@ -41,19 +41,20 @@ const db = {
                     }
                     }
                 ]
-            }
+            } 
 
-const ArticleManagement = () => {
-    return(
-        <div className='article-management'>
-            <div className='article-management-container'>
-                {db.article.map((art) => {
-                    console.log('Inside management ',{...art});
-                    <ManagementPreview {...art}/>
-                })}
+    const ArticleManagement = () => {
+        return(
+            <div className='article-management'>
+                    <div className='article-management-container'>
+                        {db.articles.map((article) => {
+                            return <ManagementPreview {...article}/>
+                        })}
+                        {/* {articleArray} */}
+                    </div>
             </div>
-        </div>
-    );
-}
+        );
+
+    }
 
 export default ArticleManagement;

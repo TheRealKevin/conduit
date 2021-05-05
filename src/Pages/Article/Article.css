@@ -80,8 +80,7 @@
 }
 
 .article-content {
-    font-size: 21px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+     
     width: 50%;
 }
 
@@ -117,12 +116,6 @@
     padding: 20px;
 }
 
-#comment-title {
-    font-family: 'Martel Sans', sans-serif;
-    font-weight: 900;
-    font-size:300px;
-}
-
 /* 
 .author-details-bio {
     border: 1px solid black
@@ -134,5 +127,61 @@
 
 .author-bio-container {
     border: 1px solid black;
-    color: rgba(117, 117, 117, 1);
+    /* color: rgba(117, 117, 117, 1); */
+}
+
+/*   COMMENT   */
+.article-comment {
+    padding: 10px;
+    margin: 10px;
+    /* background-color: sandybrown; */
+}
+
+#comment {
+    font-family: 'Martel Sans', sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.article-comment-generator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    /* background-color: tan; */
+}
+
+.article-comment-generator-container {
+    width: 50%;
+    /* background-color: lightskyblue */
+}
+
+#article-comment-generator-text {
+    width: 100%;
+    height: 120px;
+    /* background-color: peachpuff; */
+}
+
+.article-comment-generator-submit {
+    display: flex;
+    justify-content : flex-end;
+    padding: 10px;
+    /* background-color: mediumpurple; */
+}
+
+.post-button{
+    width: 90px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: white;
+    cursor: pointer;
+}
+
+.post-button:hover {
+    transition: 0.2s ease-in-out;
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
 }

@@ -1,0 +1,10 @@
+.comment-list {
+    display: flex;
+    justify-content: center;
+    /* background-color :skyblue  */
+}
+
+.comment-list-container {
+    width: 80%;
+    /* background-color: rgb(218, 145, 218); */
+}

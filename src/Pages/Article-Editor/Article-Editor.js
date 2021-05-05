@@ -3,6 +3,9 @@ import ManagementPreview from '../../Components/Management-Preview/Management-Pr
 
 import './Article-Editor.css';
 
+//         INCOMPLETE
+// ------> Copying previous content into inputs for editing articles
+
 class ArticleEditor extends Component {
     constructor(props){
         super(props);
@@ -34,7 +37,21 @@ class ArticleEditor extends Component {
     }
 
     componentDidMount() {
-        console.log('Props -> ',this.props)
+        console.log('Props -> ',this.props);
+        console.log('State before willMount -> ',this.state);
+        this.setState( (prevState) => ({
+            article : {
+                ...prevState.article,
+                title : this.props.location.state.title ? this.props.location.state.title : '',
+                description : this.props.location.state.description ? this.props.location.state.description : '',
+                body : this.props.location.state.body ? this.props.location.state.body : '',
+                tagList : this.props.location.state.tagList ? this.props.location.state.tagList : [] 
+            },
+            user : {
+                ...prevState.user
+            }
+        }))
+        console.log('State after willMount -> ',this.state);
     }
 
     handleChange = (event) => {
@@ -59,7 +76,7 @@ class ArticleEditor extends Component {
                 <div className='article-form'>
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>title : </label>
-                        <input onChange={this.handleChange} className='article-input' type='text' name='title' placeholder='title'/>
+                        <input onChange={this.handleChange} className='article-input' type='text' name='title' placeholder='this.state.'/>
                     </div>
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>slug : </label>
@@ -67,7 +84,7 @@ class ArticleEditor extends Component {
                     </div>
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>description : </label>
-                        <input onChange={this.handleChange} id='article-input-decription' className='article-input' type='text' name='description' placeholder='description'/>
+                        <textarea onChange={this.handleChange} id='article-input-decription' className='article-input' type='text' name='description' placeholder='description'/>
                     </div>
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>tag-list : </label>

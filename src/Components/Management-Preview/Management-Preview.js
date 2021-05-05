@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Tag from '../Tag/Tag';
 
 import './Management-Preview.css';
@@ -9,39 +10,51 @@ class ManagementPreview extends Component {
         super(props);
     }
 
-    getDates = (createdAt) => {
+    getDate = (createdAt) => {
         var date = createdAt;
         var year = date.substr(0,4), day = date.substr(5,2), month = date.substr(8,2);
-        console.log(`Day ${day} , month ${month} , year ${year}`);
+        // console.log(`Day ${day} , month ${month} , year ${year}`);
         return {day,month,year};
     }
-
+ 
     render(){
-        console.log(this.props);
-        const {title, tagList, createdAt} = this.props;
-        const date = this.getDates(createdAt);
-        console.log('Inside Preview ', title, tagList, createdAt)
+        // console.log(this.props);
+        const {title, tagList, createdAt, slug, description, body} = this.props;
+        const date = this.getDate(createdAt);
+        // console.log('Inside Preview ', title, tagList, createdAt)
         return(
             <div className='management-preview'>
-                <div className='management-preview-options-container'>
-                    <div className='management-preview-container'>
-                        <div className='management-preview-date'>
-                            
-                            <p>Published on {date.day}th {date.month}, {date.year}</p>
-                        </div>
-                        <div className='management-preview-title'>
-                            {title}
-                        </div>
+                <div className='management-preview-container'>
+                    <Link className='management-preview-link' to={`/api/articles/${slug}`}>
+                        <div className='management-preview-content-container'>
+                            <div className='management-preview-date'>
+                                <p>Published on {date.day}th {date.month}, {date.year}</p>
+                            </div>
+                            <div className='management-preview-title'>
+                                {title}
+                            </div>
                             <Tag className='management-preview-tag' tagList={tagList}/>
-                    </div>
-                    <div className='management-preview-option-container'>
-                        <button className='management-preview-option'>Update</button>
-                        <button className='management-preview-option'>Remove</button>
-                    </div>
+                        </div>
+                    </Link>
+                        <div className='management-preview-edit-container'>
+                            <Link to={{
+                                pathname: `/api/editor/${slug}`,
+                                state : {
+                                    slug : slug,
+                                    title : title,
+                                    description : description,
+                                    tagList : tagList,
+                                    body : body
+                                }
+                            }}>
+                                <button className='management-preview-edit'>Edit</button>
+                            </Link>
+                            <button className='management-preview-edit'>Remove</button>
+                        </div>
                 </div>
             </div>
-        );
+        ); 
     }
-}
+} 
 
 export default ManagementPreview;

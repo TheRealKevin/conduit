@@ -1,33 +1,60 @@
 import React from 'react';
 import './Comment.css';
-
+import { Link } from 'react-router-dom';
+ 
 import Seperator from '../Seperator/Seperator';
 import Doggo from './doggo.jpg'
 
-const Comment = () => {
+const Comment = ({comment}) => {
+
+    const getDate = (createdAt) => {
+        var date = createdAt;
+        var day = date.substr(0,2), month = date.substr(3,2), year = date.substr(6,2);
+        // console.log(`Day ${day} , month ${month} , year ${year}`);
+        return {day,month,year};
+    }
+    
+
+    // console.log('In Comment ',comment);
+    const {author,body,createdAt} = comment;
+    const date = getDate(createdAt);
     return(
         <div className='comment'>
             <div className='comment-container'>
                 <div className='comment-user'>
                     <div className='comment-user-pic-container'>
-                        <img className='comment-user-pic' src={Doggo} alt='comment-pic'/>
+                        <img className='comment-user-pic' src={author.image} alt='comment-pic'/>
                     </div>
                     <div className='comment-user-info-container'>
-                        <div className='comment-user-info-name'>
-                            <a href='/'>Vibe Doggo</a>
-                        </div>
+                        <Link className='comment-user-info-name' to={{
+                                pathname : `/api/profile/${comment.author.username}`,
+                                state : {
+                                    username : author.username,
+                                    bio : author.bio,
+                                    image : author.image,
+                                    following : author.following
+                                }
+                            }}>
+                            {author.username}
+                        </Link>
+                        {/* <div className='comment-user-info-name'>
+                            <a className='test' href='/api/profile/'>{author.username}</a>
+                        </div> */}
                         <div className='comment-user-info-time'>
-                            <p>2 months ago</p>
+                            <p>Written on {date.day}th {date.month} {date.year}</p>
                         </div>
                     </div>
                 </div>
                 <div className='comment-body'>
-                    <p>
-                    All things considered, they are also life-changing in the very long run. The only difficulty with those is how hidden their impact is. It’s easy to drop them because you don’t see how useful they are. Keep at them for long enough and your life will improve.
+                    <p className='comment-body-container'>
+                    {body}
                     </p>
                 </div>
             </div>
-            <Seperator/>
+            <div>
+
+            </div>
+            {/* <Seperator/> */}
         </div>
     );
 }

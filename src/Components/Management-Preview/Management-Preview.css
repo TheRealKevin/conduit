@@ -1,30 +1,36 @@
 .management-preview {
     display: flex;
     justify-content: center;
+    width: 75%;
     margin: 25px;
+    /* background-color: purple; */
 }
-
-.management-preview-options-container {
-    display: flex;
-    justify-content: center;
-    width: 70%;
-    /* background-color: springgreen; */
-}
-
+ 
 .management-preview-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    /* background-color: rgb(87, 89, 196); */
+}
+
+.management-preview-link {
+    width: 100%;
+}
+
+.management-preview-content-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 75%;
+    width: 100%;
     border: 1px solid black;
-    /* background-color: lemonchiffon; */
+    background-color: lemonchiffon;
 }
-
+ 
 .management-preview-tag {
     display: flex;
     justify-content: center;
     width: 80%;
-    background-color: paleturquoise;
+    /* background-color: paleturquoise; */
 }
 
 .management-preview-title {
@@ -33,21 +39,25 @@
     margin: 15px;
 }
 
-.management-preview-option-container {
+.management-preview-edit-container {
     width: 10%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     border: 1px solid black;
-    background-color: rgb(199, 191, 191);
+    /* background-color: #ca5252; */
 }
 
-.management-preview-option {
+.management-preview-edit {
+    width: 85%;
+    height: 10%;
+    font-size: 40%;
+    border-radius: 10%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.management-preview-option:hover {
+.management-preview-edit:hover {
     color: white;
     background-color: black;
     transition: all 300ms ease-in-out;

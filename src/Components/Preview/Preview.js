@@ -3,6 +3,8 @@ import './Preview.css';
 import clap from './clapping_25.png';
 import comment from './comment_25.png';
 
+import Seperator from '../Seperator/Seperator';
+
 const Preview = () => {
     return(
         <div className='preview'>
@@ -42,11 +44,12 @@ const Preview = () => {
                         </div>
                     </div>
                 </div>
-                <div className='seperator'>
+                {/* <div className='seperator'>
                     <span className='seperator-span'>.</span>
                     <span className='seperator-span'>.</span>
                     <span className='seperator-span'>.</span>
-                </div>
+                </div> */}
+                <Seperator/>
             </div>
         </div>
     );

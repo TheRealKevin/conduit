@@ -76,7 +76,7 @@ class App extends Component {
         <Route path='/api/users' exact component={Signup}/>
         <Route path='/api/profile/:username' component={User}/>
         <Route exact path='/api/articles/feed' component={Feed}/>
-        <Route exact path='/api/articles/:slug' render={(props) => (<Article {...this.state.article}/>)}/>
+        <Route exact path='/api/articles/:slug' render={(props) => (<Article {...this.state.article[0]}/>)}/>
         <Route path='/api/editor' component={ArticleEditor}/>
         <Footer/>
       </div>
