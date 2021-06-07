@@ -24,10 +24,8 @@
     justify-content: center;
     padding: 15px;
     width: 35%;
-    /* justify-content: space-between;
-    align-self: center; */
     border: 1px solid black;
-    background-color: rgba(212, 202, 200, 0.623);
+    background-color: rgba(212, 202, 200, 0.623);    
 }
 
 .author-pic-container {
@@ -37,25 +35,33 @@
     /* background-color: rgba(212, 202, 200, 0.623); */
 }
 
+.author-img {
+    border-radius: 50%;
+}
+
 #author-username {
     font-family: 'Dosis', sans-serif;
     font-size: 27px;
     font-weight: 600;
 }
 
-/* #author-img {
-    width: 120px;
-    border-radius: 50%;
-    border: 2px solid black;
-} */
-
-.author-img {
-    border-radius: 50%;
-}
-
-#following-status {
+.following-status {
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    /* align-content : center; */
+    width : 120px;
+    height : 40px;
+    text-decoration : underline;
+    font-size : 25px;
+    font-weight : 400;
     font-family: 'Dosis', sans-serif;
 }
+
+#follow-btn {
+    margin: 20px;
+}
+
 
 /* Article content Styling */
 
@@ -80,7 +86,6 @@
 }
 
 .article-content {
-     
     width: 50%;
 }
 
@@ -114,15 +119,6 @@
 
 #written {
     padding: 20px;
-}
-
-/* 
-.author-details-bio {
-    border: 1px solid black
-} */
-
-#follow-btn {
-    margin: 20px;
 }
 
 .author-bio-container {

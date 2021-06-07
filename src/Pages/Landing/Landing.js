@@ -1,11 +1,15 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 
 import './Landing.css';
 import blogpic from './blogpic.jpg';
+
+// handleSubmit = () => {
+    
+// }
 
 const Landing = () => {
     return(
@@ -45,11 +49,13 @@ const Landing = () => {
                 <div className='landing-page-sign'>
                     <div className='landing-page-signin'>
                         <p>Sign In to access thousands of authors articles</p>
-                        <button className='sign-button'>Sign In</button>
+                        <Link to='/api/users/login'>
+                            <button className='sign-button'>Sign In</button>
+                        </Link>
                     </div>
                     <div className='landing-page-signup'>
                         <p>Haven't made a Medium-Clone account yet? Let's get started </p>
-                        <a id='signup-button' href=''>Click here</a>
+                        <a id='signup-button' href='/api/users'>Click here</a>
                     </div>
                 </div>
             </div>

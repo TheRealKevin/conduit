@@ -1,37 +1,38 @@
-import React from 'react';
-import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { removeCurrentUser } from '../../Redux/User/User.actions';
 
 import './Navbar.css';
 
 //  Fixes
-//  1. remove user when sign out is hit
+//  1. Remove user when sign out is hit
+//  2. Use currentUser from props (Redux)
 
 class Navbar extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            user : {}
-        }
     }
 
-    componentDidMount(){
-        if(this.props.user.length > 0){
-            this.setState({
-                user : this.state.user
-            })
-        }
+    handleSignOut = () => {
+        console.log(`props are ${this.props}`);
+        this.props.removeCurrentUser();
+        return <Redirect to='/'/>
     }
      
     render(){
-        const user = this.state;
+        const currentUser = this.props;
+        console.log(`props are ${this.props}`);
+        console.log(`user is ${currentUser}`);
+        console.log(`username is ${currentUser.username}`);
         return(
             <nav className='navbar navbar-fixed-top'>
                 <div className='nav-container'>
                     <div className='header'>
                         <a className='brand navbar-brand' href='/'>Medium Clone</a>
                     </div>
-                    {!user ? 
+                    {!currentUser ? 
                         <div className='options'>
                             <ul>
                                 <li className='nav-options'>
@@ -50,10 +51,10 @@ class Navbar extends Component {
                         <div className='options'>
                             <ul>
                                 <li className='nav-options'>
-                                    <Link to={`/api/profile/${user.username}`}>My Profile</Link>
+                                    <Link to={`/api/profile/${currentUser.username}`}>My Profile</Link>
                                 </li>
                                 <li className='nav-options'>
-                                    <Link to='/'>Sign Out</Link>
+                                    <Link to='/' onClick={this.handleSignOut}>Sign Out</Link>
                                 </li>
                             </ul>
                         </div>
@@ -64,4 +65,12 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar; 
+const mapStateToProps = ({user}) => ({
+    currentUser : user.currentUser
+})
+
+const mapDispatchToProps = dispatch => ({
+    removeCurrentUser : () => dispatch(removeCurrentUser())
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navbar); 

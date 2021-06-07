@@ -15,36 +15,26 @@ import Seperator from '../../Components/Seperator/Seperator';
 
 class Article extends Component{
     
-    db = [
-        {
-            id : 1,
-            createdAt: '16-02-18T03:22:56.637Z',
-            updatedAt: '16-02-18T03:22:56.637Z',
-            body : 'It takes a Jacobian',
-            author : {
-                username : 'Vibe Doggo',
-                bio : 'Skert Skert',
-                image : 'https://previews.123rf.com/images/virgonira/virgonira1104/virgonira110400018/9204773-smiling-alaskan-malamute.jpg',
-                following : false
-            }
-        },
-        {
-            id : 2,
-            createdAt: '02-05-21T03:22:56.637Z',
-            updatedAt: '02-05-21T03:22:56.637Z',
-            body : 'Smells like teen spirit',
-            author : {
-                username : 'Mr. Red Panda',
-                bio : 'Mr. steal your girl',
-                image : 'https://i.imgur.com/48d0SQ9.jpg',
-                following : true
-            }
-        }
-    ]
-    
     constructor(props){
         super(props);
         this.state = {
+            article : {
+                    slug : '',
+                    title: '',
+                    description: '',
+                    body: '',
+                    tagList: [],
+                    createdAt: '',
+                    updatedAt: '',
+                    favorited: false,
+                    favoritesCount: 0,
+                    author: {
+                      username: '',
+                      bio: '',
+                      image: '',
+                      following: false
+                    }
+                },
             comments : [
                 {
                     id : 1,
@@ -52,7 +42,7 @@ class Article extends Component{
                     updatedAt: '16-02-18T03:22:56.637Z',
                     body : 'It takes a Jacobian',
                     author : {
-                        username : 'Vibe Doggo',
+                        username : 'Doggo',
                         bio : 'Skert Skert',
                         image : 'https://previews.123rf.com/images/virgonira/virgonira1104/virgonira110400018/9204773-smiling-alaskan-malamute.jpg',
                         following : false
@@ -64,7 +54,7 @@ class Article extends Component{
                     updatedAt: '02-05-21T03:22:56.637Z',
                     body : 'Smells like teen spirit',
                     author : {
-                        username : 'Mr. Red Panda',
+                        username : 'Red-Panda',
                         bio : 'Mr. steal your girl',
                         image : 'https://i.imgur.com/48d0SQ9.jpg',
                         following : true
@@ -86,6 +76,30 @@ class Article extends Component{
         }
     }
 
+    componentDidMount(){
+        console.log('In didMount Yoooooooo');
+        const {slug,title,description,body,tagList,createdAt,updatedAt,favorited,favoritesCount,author} = this.props;
+        console.log('In onMount props are ',this.props)
+        this.setState({
+            slug : slug,
+            title : title,
+            description : description,
+            body : body,
+            tagList : tagList,
+            createdAt : createdAt,
+            updatedAt : updatedAt,
+            favorited : favorited,
+            favoritesCount : favoritesCount,
+            author : {
+                username : author.username,
+                bio : author.bio,
+                image : author.image,
+                following : author.following
+            }
+        })
+        console.log('In didMount ',this.state);
+    }
+
     handleChange = (event) => {
         // console.log('In Article -> handleChange ',this.state.addComment)
         this.setState( (prevState) => ({
@@ -95,9 +109,9 @@ class Article extends Component{
         }))
     }
 
-    componentDidUpdate(){
-        console.log('In componentDidUpdate',this.state.comments);
-    }
+    // componentDidUpdate(){
+    //     console.log('In componentDidUpdate',this.state.comments);
+    // }
 
     handleSubmit = () => {
         if(!this.state.addComment.body){
@@ -123,9 +137,22 @@ class Article extends Component{
            ]
        }))
     }
+
+    handleFollowing = () => {
+        console.log('handleFollowing ', this.state.article.author.following)
+        // this.setState((prevState) => ({
+        //     article : {
+        //         ...prevState.article,
+        //         author : {
+        //             ...prevState.article.author,
+        //             following : !following
+        //         }
+        //     }
+        // }))
+    }
     
     render(){
-        const {title,author,favorited,favoritesCount,tagList,body} = this.props;
+        const {title,author,favorited,favoritesCount,tagList,body} = this.state;
         return(
             <article>
                 <div className='article-header'>
@@ -140,7 +167,9 @@ class Article extends Component{
                             <div className='author-info'>
                                 <h3 id='author-username'>{author.username}</h3>
                                 {author.following ? 
-                                    <h4 id='following-status'>Following</h4>
+                                    <div className='following-status'>
+                                        <h4 id='following'>Following</h4>
+                                    </div> 
                                     :
                                     <button className='sign-button' id='follow-btn'>Follow</button>
                                 }
@@ -179,10 +208,12 @@ class Article extends Component{
                             <div className='author-details-bio-container'>
                                 <p id='author-username'>{author.username}</p>
                                 {
-                                    author.following ? 
-                                    <h4 id='following-status'>Following</h4>
+                                    author.following ?
+                                    <div className='following-status'>
+                                        <h4 onClick={this.handleFollowing} id='following'>Following</h4>
+                                    </div> 
                                     :
-                                    <button className='sign-button' id='follow-btn'>Follow</button>
+                                    <button onClick={this.handleFollowing} className='sign-button' id='follow-btn'>Follow</button>
                                 }
                             </div>
                         </div>

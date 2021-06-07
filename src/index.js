@@ -7,9 +7,13 @@ import 'tachyons';
 import './index.css';
 import App from './App';
 
+import store from './Redux/store';
+
 ReactDOM.render(
-      <BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
         <App />
-      </BrowserRouter>,
-      document.getElementById('root')
+      </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
 );

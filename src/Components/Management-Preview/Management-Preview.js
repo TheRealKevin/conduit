@@ -21,7 +21,7 @@ class ManagementPreview extends Component {
         // console.log(this.props);
         const {title, tagList, createdAt, slug, description, body} = this.props;
         const date = this.getDate(createdAt);
-        // console.log('Inside Preview ', title, tagList, createdAt)
+        console.log('Inside Preview ', title, tagList, slug)
         return(
             <div className='management-preview'>
                 <div className='management-preview-container'>

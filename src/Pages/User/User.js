@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import ArticleManagement from '../../Components/Article-Management/Article-Management';
 
 import './User.css';
@@ -8,26 +9,27 @@ import './User.css';
 class User extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            username : '',
-            following : false,
-            bio : '',
-            image : ''
-        }
+        // this.state = {
+        //     username : '',
+        //     following : false,
+        //     bio : '',
+        //     image : ''
+        // }
     }
 
-    componentDidMount(){
-        const {username,bio,image,following} = this.props;
-        this.setState({
-            username : username,
-            bio : bio,
-            image : image,
-            following : following
-        })
-    }
+    // componentDidMount(){
+    //     const {username,bio,image,following} = this.props;
+    //     console.log('Props are ',this.props);
+    //     this.setState({
+    //         username : username,
+    //         bio : bio,
+    //         image : image,
+    //         following : following
+    //     })
+    // }
 
     render(){
-        const {username,bio,image,following} = this.state;
+        const {username,bio,image,following} = this.props;
         console.log(username,bio,following ? 'following' : 'not');
         return(
             <div className='user'>
@@ -68,4 +70,8 @@ class User extends Component {
     }
 }
 
-export default User;
+const mapStateToProps = ({user}) => ({
+    currentUser : user.currentUser
+})
+
+export default connect(mapStateToProps,null)(User);

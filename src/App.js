@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import {connect} from 'react-redux'
 
 import './App.css';
 
@@ -15,7 +16,10 @@ import Signin from './Pages/Signin/Signin';
 import Signup from './Pages/Signup/Signup';
 import User from './Pages/User/User';
 
+import {setCurrentUser} from './Redux/User/User.actions';
 
+/*  NOTES  */
+// 1. Username should have no spaces (can use special characters instead) 
 
 class App extends Component {
 
@@ -42,7 +46,7 @@ class App extends Component {
                       username: 'Jake',
                       bio: 'I work at statefarm',
                       image: 'https://i.stack.imgur.com/xHWG8.jpg',
-                      following: false
+                      following: true
                     }
                   }
                   ,
@@ -84,4 +88,8 @@ class App extends Component {
   }
 }
 
-export default App;
+// const mapDispatchToProps = dispatch => ({
+//     setCurrentUser: user => dispatch(setCurrentUser(user))
+// })
+
+export default connect(null,null)(App);

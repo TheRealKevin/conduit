@@ -1,9 +1,16 @@
 import React,{ Component } from 'react';
 import './Signin.css';
 
+import { connect } from 'react-redux';
+
+import { setCurrentUser } from '../../Redux/User/User.actions';
+
+//      TODO
+// 1. Check with postman whether data from frontend is verifying thru the DB.
+
 class Signin extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             email : '',
             password : ''
@@ -18,7 +25,17 @@ class Signin extends Component {
     }
 
     handleSubmit = () => {
-        console.log('Account made')
+        console.log(`email and password are : ${this.state.email} and ${this.state.password}`)
+        fetch('http://localhost:3000/api/users/login',{
+            method : 'POST',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify({
+                email : this.state.email,
+                password : this.state.password
+            })
+        })
+        .then( res => res.json())
+        .then( data => console.log(data))
     }
 
     render(){
@@ -38,4 +55,8 @@ class Signin extends Component {
     }
 }
 
-export default Signin;
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null,mapDispatchToProps)(Signin);

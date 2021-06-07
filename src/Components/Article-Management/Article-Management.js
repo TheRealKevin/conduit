@@ -48,7 +48,7 @@ const db = {
             <div className='article-management'>
                     <div className='article-management-container'>
                         {db.articles.map((article) => {
-                            return <ManagementPreview {...article}/>
+                            return <ManagementPreview key={article.slug} {...article}/>
                         })}
                         {/* {articleArray} */}
                     </div>
