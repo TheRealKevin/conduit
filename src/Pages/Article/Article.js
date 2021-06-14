@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import './Article.css';
 
+import { connect } from 'react-redux';
+
+import { getArticle } from '../../Redux/Article/Article.actions';
+ 
 import Tag from '../../Components/Tag/Tag';
 import CommentList from '../../Components/CommentList/CommentList';
 import Seperator from '../../Components/Seperator/Seperator';
 
 /* FIXES REQUIRED */
 
+//  * CANT READ PROPERTY OF AUTHOR UNDEFINED
 //  1. Written on Date format function in Comment.js
 //  2. Add Edit comment button
 //  3. Link the comments author details to current user
@@ -78,7 +83,7 @@ class Article extends Component{
 
     componentDidMount(){
         console.log('In didMount Yoooooooo');
-        const {slug,title,description,body,tagList,createdAt,updatedAt,favorited,favoritesCount,author} = this.props;
+        const {slug,title,description,body,tagList,createdAt,updatedAt,favorited,favoritesCount} = this.state;
         console.log('In onMount props are ',this.props)
         this.setState({
             slug : slug,
@@ -86,15 +91,15 @@ class Article extends Component{
             description : description,
             body : body,
             tagList : tagList,
-            createdAt : createdAt,
+            createdAt : createdAt, 
             updatedAt : updatedAt,
             favorited : favorited,
             favoritesCount : favoritesCount,
             author : {
-                username : author.username,
-                bio : author.bio,
-                image : author.image,
-                following : author.following
+                username : 'test', //author.username,
+                bio : 'this is a test', //author.bio,
+                image : 'https://openclipart.org/download/247320/abstract-user-flat-4.svg',//author.image,
+                following : false //author.following
             }
         })
         console.log('In didMount ',this.state);
@@ -109,33 +114,13 @@ class Article extends Component{
         }))
     }
 
-    // componentDidUpdate(){
-    //     console.log('In componentDidUpdate',this.state.comments);
-    // }
-
     handleSubmit = () => {
         if(!this.state.addComment.body){
             alert('Oops, you might have forgotten to write the comment')
             return;
         }
-        console.log(this.state.addComment.body)
-       this.setState( (prevState) => ({   
-        comments : [
-               ...prevState.comments,
-               {
-                    id : prevState.comments.length+1, 
-                    body : prevState.addComment.body,
-                    createdAt : new Date().toString(),
-                    updatedAt : new Date().toString(),
-                    author : {
-                        username : 'Arsenal FC',
-                        bio : 'Random Bio',
-                        image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBufnXiExP5gTz3X4Zwjku_fv3fGaZPVxuYq7koL4xJ0Pvp6y8KT7MV9e1MyoHA8Hu_O8&usqp=CAU',
-                        following : true
-                    }
-               }
-           ]
-       }))
+        console.log(this.state.addComment.body);
+        
     }
 
     handleFollowing = () => {
@@ -243,4 +228,8 @@ class Article extends Component{
     }
 }
 
-export default Article;
+const mapStateToProps = state => ({
+    article : state.article
+})
+
+export default connect(mapStateToProps,null)(Article);

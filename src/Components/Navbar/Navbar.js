@@ -7,7 +7,7 @@ import { removeCurrentUser } from '../../Redux/User/User.actions';
 import './Navbar.css';
 
 //  Fixes
-//  1. Remove user when sign out is hit
+//  1. [Object object] error in this.props
 //  2. Use currentUser from props (Redux)
 
 class Navbar extends Component {

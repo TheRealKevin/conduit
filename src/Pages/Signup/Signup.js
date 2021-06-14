@@ -1,16 +1,20 @@
 import React,{Component} from 'react';
 import './Signup.css';
 
+import { connect } from 'react-redux';
+
+import { setCurrentUser } from '../../Redux/User/User.actions';
+
 class Signup extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             username : '',
             password : '',
             email : ''
         }
     }
-
+ 
     handleChange = (event) => {
         const {name,value} = event.target;
         this.setState({
@@ -19,7 +23,18 @@ class Signup extends Component {
     } 
 
     handleSubmit = () => {
-        console.log('Signed Up');
+        const {setCurrentUser} = this.props;
+        fetch('http://localhost:3000/api/users',{
+            method : 'POST',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify({
+                username : this.state.username,
+                email : this.state.email,
+                password : this.state.password
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
     }
 
     render(){
@@ -33,11 +48,15 @@ class Signup extends Component {
                 </div>
                 <div className='signup-btn'>
                     <a id='signup-btn' href='/'>Sign In</a>
-                    <button className='sign-button' onChange={this.handleSubmit} type='submit'>Sign Up</button>
+                    <button className='sign-button' onClick={this.handleSubmit} type='submit'>Sign Up</button>
                 </div>
             </div>
         );
     }
 }
 
-export default Signup;
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser : user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null,mapDispatchToProps)(Signup);

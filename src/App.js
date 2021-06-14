@@ -19,7 +19,9 @@ import User from './Pages/User/User';
 import {setCurrentUser} from './Redux/User/User.actions';
 
 /*  NOTES  */
-// 1. Username should have no spaces (can use special characters instead) 
+
+// 1. FIX Articles.js
+// 2. Username should have no spaces (can use special characters instead) 
 
 class App extends Component {
 
@@ -86,7 +88,7 @@ class App extends Component {
       </div>
     );
   }
-}
+} 
 
 // const mapDispatchToProps = dispatch => ({
 //     setCurrentUser: user => dispatch(setCurrentUser(user))
