@@ -1,36 +1,16 @@
 import React,{Component} from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ArticleManagement from '../../Components/Article-Management/Article-Management';
 
 import './User.css';
-// import img from './img.jpg';
  
 class User extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     username : '',
-        //     following : false,
-        //     bio : '',
-        //     image : ''
-        // }
     }
 
-    // componentDidMount(){
-    //     const {username,bio,image,following} = this.props;
-    //     console.log('Props are ',this.props);
-    //     this.setState({
-    //         username : username,
-    //         bio : bio,
-    //         image : image,
-    //         following : following
-    //     })
-    // }
-
     render(){
-        const {username,bio,image,following} = this.props;
-        console.log(username,bio,following ? 'following' : 'not');
+        const {username,bio,following,image} = this.props.currentUser
         return(
             <div className='user'>
                 <div className='user-username-container'>
@@ -43,16 +23,8 @@ class User extends Component {
                     </div>
                     <img id='user-img'  src={image} alt='user-profile-pic'/>
                     <div className='user-info-container'>
-                        {   
-                            /*   email can also be added to a users profile   */ 
-                            
-                            /* <div className='user-info'>
-                                <label for='email'>Email</label>
-                                <p>vibecat@mail.com</p>
-                            </div> */
-                        }
                         <div className='user-info'>
-                            <label for='bio'>Bio</label>
+                            <label htmlFor='bio'>Bio</label>
                             <p>{bio}</p>
                         </div>
                     </div>
@@ -70,8 +42,8 @@ class User extends Component {
     }
 }
 
-const mapStateToProps = ({user}) => ({
-    currentUser : user.currentUser
+const mapStateToProps = state => ({
+    currentUser : state.user.currentUser
 })
 
 export default connect(mapStateToProps,null)(User);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import {connect} from 'react-redux'
 
 import './App.css';
@@ -25,73 +25,31 @@ import {setCurrentUser} from './Redux/User/User.actions';
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      user : {
-              name : 'Kevin',
-              username : 'kevin',
-              email: 'kev@mail.com'
-             },
-      article : [
-                  {
-                    slug : 'vibe-cats-article',
-                    title: 'How to train your dragon',
-                    description: 'Ever wonder how?',
-                    body: 'It takes a Jacobian',
-                    tagList: ['dragons', 'training'],
-                    createdAt: '2016-02-18T03:22:56.637Z',
-                    updatedAt: '2016-02-18T03:48:35.824Z',
-                    favorited: false,
-                    favoritesCount: 0,
-                    author: {
-                      username: 'Jake',
-                      bio: 'I work at statefarm',
-                      image: 'https://i.stack.imgur.com/xHWG8.jpg',
-                      following: true
-                    }
-                  }
-                  ,
-                  {
-                    slug: 'how-to-train-your-dragon-2',
-                    title: 'How to train your dragon 2',
-                    description: 'So toothless',
-                    body: 'It a dragon',
-                    tagList: ['dragons', 'training'],
-                    createdAt: '2016-02-18T03:22:56.637Z',
-                    updatedAt: '2016-02-18T03:48:35.824Z',
-                    favorited: false,
-                    favoritesCount: 0,
-                    author: {
-                      username: 'jake',
-                      bio: 'I work at statefarm',
-                      image: 'https://i.stack.imgur.com/xHWG8.jpg',
-                      following: false
-                    }
-                  }
-                ]
-              }
-            }
+  constructor(props){
+    super(props);
+  }
+    
 
   render(){
-    return (
-      <div className="App">
-        <Navbar user={this.state.user}/>
-        <Route path='/' exact component={Landing} />
-        <Route path='/api/users/login' exact component={Signin}/>
-        <Route path='/api/users' exact component={Signup}/>
-        <Route path='/api/profile/:username' component={User}/>
-        <Route exact path='/api/articles/feed' component={Feed}/>
-        <Route exact path='/api/articles/:slug' render={(props) => (<Article {...this.state.article[0]}/>)}/>
-        <Route path='/api/editor' component={ArticleEditor}/>
-        <Footer/>
-      </div>
-    );
-  }
-} 
+      return (
+        <div className="App">
+          <Navbar user={this.props.user}/>
+          <Route path='/' exact component={Landing} />
+          <Route path='/api/users/login' exact render={(props) => (<Signin {...props}/>)}/>
+          <Route path='/api/users' exact render={(props) => (<Signup {...props}/>)}/>
+          <Route path='/api/profile/:username' component={User}/>
+          <Route exact path='/api/articles/feed' component={Feed}/>
+          <Route exact path='/api/articles/:slug' render={(props) => (<Article {...this.props.article}/>)}/>
+          <Route path='/api/editor' component={ArticleEditor}/>
+          <Footer/>
+        </div>
+      );
+    }
+  } 
 
-// const mapDispatchToProps = dispatch => ({
-//     setCurrentUser: user => dispatch(setCurrentUser(user))
-// })
+const mapStateToProps = state => ({
+  user : state.user.currentUser,
+  article : state.article.article
+})
 
-export default connect(null,null)(App);
+export default connect(mapStateToProps,null)(App);

@@ -7,8 +7,7 @@ import { removeCurrentUser } from '../../Redux/User/User.actions';
 import './Navbar.css';
 
 //  Fixes
-//  1. [Object object] error in this.props
-//  2. Use currentUser from props (Redux)
+//  1. Get the footer to be fixed at the bottom
 
 class Navbar extends Component {
     constructor(props){
@@ -16,34 +15,32 @@ class Navbar extends Component {
     }
 
     handleSignOut = () => {
-        console.log(`props are ${this.props}`);
         this.props.removeCurrentUser();
         return <Redirect to='/'/>
     }
      
     render(){
-        const currentUser = this.props;
-        console.log(`props are ${this.props}`);
-        console.log(`user is ${currentUser}`);
-        console.log(`username is ${currentUser.username}`);
+        const {user} = this.props;
         return(
             <nav className='navbar navbar-fixed-top'>
                 <div className='nav-container'>
                     <div className='header'>
-                        <a className='brand navbar-brand' href='/'>Medium Clone</a>
+                        <Link className='brand navbar-brand' to='/'>
+                            Medium Clone
+                        </Link>
                     </div>
-                    {!currentUser ? 
+                    {!user ? 
                         <div className='options'>
                             <ul>
                                 <li className='nav-options'>
-                                    <a href=''>
+                                    <Link to='/api/users/login'>
                                         Sign In
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className='nav-options'>
-                                    <a href=''>
+                                    <Link to='/api/users'>
                                         Sign Up
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul> 
                         </div>
@@ -51,7 +48,7 @@ class Navbar extends Component {
                         <div className='options'>
                             <ul>
                                 <li className='nav-options'>
-                                    <Link to={`/api/profile/${currentUser.username}`}>My Profile</Link>
+                                    <Link to={`/api/profile/${user.username}`}>My Profile</Link>
                                 </li>
                                 <li className='nav-options'>
                                     <Link to='/' onClick={this.handleSignOut}>Sign Out</Link>
@@ -65,8 +62,8 @@ class Navbar extends Component {
     }
 }
 
-const mapStateToProps = ({user}) => ({
-    currentUser : user.currentUser
+const mapStateToProps = state => ({
+    user : state.user.currentUser
 })
 
 const mapDispatchToProps = dispatch => ({

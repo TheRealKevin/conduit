@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import './Signup.css';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { setCurrentUser } from '../../Redux/User/User.actions';
 
@@ -23,18 +24,25 @@ class Signup extends Component {
     } 
 
     handleSubmit = () => {
-        const {setCurrentUser} = this.props;
+        const {setCurrentUser,history} = this.props;
+
+        const user = {
+            email : this.state.email,
+            password : this.state.password,
+            username : this.state.username
+        }
         fetch('http://localhost:3000/api/users',{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify({
-                username : this.state.username,
-                email : this.state.email,
-                password : this.state.password
-            })
+            body : JSON.stringify({user})
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if(data){
+                setCurrentUser(data);
+                history.push('/')
+            }
+        })
     }
 
     render(){
@@ -47,7 +55,9 @@ class Signup extends Component {
                     <input className='signup-input' onChange={this.handleChange} type='password' name='password' placeholder='Password'/>
                 </div>
                 <div className='signup-btn'>
-                    <a id='signup-btn' href='/'>Sign In</a>
+                    <Link id='signup-btn' to='/api/users/login'>
+                        Sign In
+                    </Link>
                     <button className='sign-button' onClick={this.handleSubmit} type='submit'>Sign Up</button>
                 </div>
             </div>

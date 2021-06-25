@@ -55,7 +55,9 @@ const Landing = () => {
                     </div>
                     <div className='landing-page-signup'>
                         <p>Haven't made a Medium-Clone account yet? Let's get started </p>
-                        <a id='signup-button' href='/api/users'>Click here</a>
+                        <Link to='/api/users' id='signup-button'>
+                            Click here
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import './Signin.css';
 import { connect } from 'react-redux';
 
 import { setCurrentUser } from '../../Redux/User/User.actions';
+import { Redirect , Link } from 'react-router-dom';
  
 //      TODO
 // 1. Check with postman whether data from frontend is verifying thru the DB.
@@ -25,17 +26,25 @@ class Signin extends Component {
     }
 
     handleSubmit = () => {
-        console.log(`email and password are : ${this.state.email} and ${this.state.password}`)
+        const {setCurrentUser,history} = this.props;        
+        const user = {
+            email : this.state.email,
+            password : this.state.password
+        }        
         fetch('http://localhost:3000/api/users/login',{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify({
-                email : this.state.email,
-                password : this.state.password
-            })
+            body : JSON.stringify({user})
         })
         .then( res => res.json())
-        .then( data => console.log(data))
+        .then( (data) => {
+            if(data.user){
+                setCurrentUser(data.user);
+                history.push('/');
+            }else{
+                alert(data.errors.body[0]);
+            }
+        })
     }
 
     render(){
@@ -47,7 +56,9 @@ class Signin extends Component {
                     <input className='signin-input' onChange={this.handleChange} type='password' name='password' placeholder='Password'/>
                 </div>
                 <div className='signin-btn'>
-                    <a id='signup-btn' href='/'>Sign Up</a>
+                    <Link id='signup-btn' to='/api/users'>
+                        Sign Up
+                    </Link>
                     <button className='sign-button' onClick={this.handleSubmit} type='submit'>Sign In</button>
                 </div>
             </div>
