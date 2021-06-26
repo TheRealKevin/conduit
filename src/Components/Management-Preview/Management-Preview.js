@@ -21,7 +21,6 @@ class ManagementPreview extends Component {
         // console.log(this.props);
         const {title, tagList, createdAt, slug, description, body} = this.props;
         const date = this.getDate(createdAt);
-        console.log('Inside Preview ', title, tagList, slug)
         return(
             <div className='management-preview'>
                 <div className='management-preview-container'>
@@ -33,20 +32,11 @@ class ManagementPreview extends Component {
                             <div className='management-preview-title'>
                                 {title}
                             </div>
-                            <Tag className='management-preview-tag' tagList={tagList}/>
+                            {/* <Tag className='management-preview-tag' tagList={tagList}/> */}
                         </div>
                     </Link>
                         <div className='management-preview-edit-container'>
-                            <Link to={{
-                                pathname: `/api/editor/${slug}`,
-                                state : {
-                                    slug : slug,
-                                    title : title,
-                                    description : description,
-                                    tagList : tagList,
-                                    body : body
-                                }
-                            }}>
+                            <Link to={`/api/editor/${slug}`}>
                                 <button className='management-preview-edit'>Edit</button>
                             </Link>
                             <button className='management-preview-edit'>Remove</button>

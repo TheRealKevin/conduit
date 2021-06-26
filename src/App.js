@@ -37,9 +37,9 @@ class App extends Component {
           <Route path='/' exact component={Landing} />
           <Route path='/api/users/login' exact render={(props) => (<Signin {...props}/>)}/>
           <Route path='/api/users' exact render={(props) => (<Signup {...props}/>)}/>
-          <Route path='/api/profile/:username' component={User}/>
+          <Route path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
           <Route exact path='/api/articles/feed' component={Feed}/>
-          <Route exact path='/api/articles/:slug' render={(props) => (<Article {...this.props.article}/>)}/>
+          <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
           <Route path='/api/editor' component={ArticleEditor}/>
           <Footer/>
         </div>
@@ -48,8 +48,7 @@ class App extends Component {
   } 
 
 const mapStateToProps = state => ({
-  user : state.user.currentUser,
-  article : state.article.article
+  user : state.user.currentUser
 })
 
 export default connect(mapStateToProps,null)(App);

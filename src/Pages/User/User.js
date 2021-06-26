@@ -2,15 +2,41 @@ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import ArticleManagement from '../../Components/Article-Management/Article-Management';
 
+import { loadArticles } from '../../Redux/Article/Article.actions';
+
 import './User.css';
+
+//      FIXES
+//  1. FETCH Articles of a particular user
  
 class User extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            articlesCount : 0
+        }
+    }
+
+    componentDidMount() {
+        const { loadArticles } = this.props;
+        const username = this.props.match.params.username;
+        // console.log(this.props);
+        fetch(`http://localhost:3000/api/articles?username=${username}`)
+        .then(res => res.json())
+        .then(articles => {
+            // console.log('endpoint hit')
+            if(articles.length > 0){
+                // console.log(articles);
+                this.setState({
+                    articlesCount : articles.length
+                })
+                loadArticles(articles);
+            }
+        })
     }
 
     render(){
-        const {username,bio,following,image} = this.props.currentUser
+        const {username,bio,following,image} = this.props.currentUser;
         return(
             <div className='user'>
                 <div className='user-username-container'>
@@ -46,4 +72,8 @@ const mapStateToProps = state => ({
     currentUser : state.user.currentUser
 })
 
-export default connect(mapStateToProps,null)(User);
+const mapDispatchToProps = dispatch => ({
+    loadArticles : (articles) => dispatch(loadArticles(articles))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(User);

@@ -24,48 +24,18 @@ class Article extends Component{
         super(props);
         this.state = {
             article : {
-                    slug : '',
-                    title: '',
-                    description: '',
-                    body: '',
-                    tagList: [],
-                    createdAt: '',
-                    updatedAt: '',
-                    favorited: false,
-                    favoritesCount: 0,
-                    author: {
-                      username: '',
-                      bio: '',
-                      image: '',
-                      following: false
-                    }
-                },
-            comments : [
-                {
-                    id : 1,
-                    createdAt: '16-02-18T03:22:56.637Z',
-                    updatedAt: '16-02-18T03:22:56.637Z',
-                    body : 'It takes a Jacobian',
-                    author : {
-                        username : 'Doggo',
-                        bio : 'Skert Skert',
-                        image : 'https://previews.123rf.com/images/virgonira/virgonira1104/virgonira110400018/9204773-smiling-alaskan-malamute.jpg',
-                        following : false
-                    }
-                },
-                {
-                    id : 2,
-                    createdAt: '02-05-21T03:22:56.637Z',
-                    updatedAt: '02-05-21T03:22:56.637Z',
-                    body : 'Smells like teen spirit',
-                    author : {
-                        username : 'Red-Panda',
-                        bio : 'Mr. steal your girl',
-                        image : 'https://i.imgur.com/48d0SQ9.jpg',
-                        following : true
-                    }
+                slug : '',
+                title : '',
+                description : '',
+                body : '',
+                createdAt : '',
+                updatedAt : '',
+                author : {
+                    username : '',
+                    bio : '',
+                    image : ''
                 }
-            ],
+            },
             addComment : {
                 id : '',
                 createdAt : '',
@@ -81,28 +51,35 @@ class Article extends Component{
         }
     }
 
-    componentDidMount(){
-        console.log('In didMount Yoooooooo');
-        const {slug,title,description,body,tagList,createdAt,updatedAt,favorited,favoritesCount} = this.state;
-        console.log('In onMount props are ',this.props)
+    async componentDidMount(){
+        const slug = this.props.match.params.slug;
+        // fetch(`http://localhost:3000/api/articles/${slug}`)
+        // .then(res => res.json())
+        // .then(data => {
+        //     if(data){
+        //         console.log('From data',data);
+        //         const {title, slug, description, createdAt, updatedAt, body, author} = data;
+        //         this.setState({
+        //             title : title,
+        //             slug : slug,
+        //             description : description,
+        //             createdAt : createdAt,
+        //             updatedAt : updatedAt,
+        //             body : body, 
+        //             author : {
+        //                 username : author.username,
+        //                 bio : author.bio,
+        //                 image : author.image
+        //             }
+        //         }) 
+        //     }
+        // });
+        const _article = await fetch(`http://localhost:3000/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
+        const article = await _article.json();
         this.setState({
-            slug : slug,
-            title : title,
-            description : description,
-            body : body,
-            tagList : tagList,
-            createdAt : createdAt, 
-            updatedAt : updatedAt,
-            favorited : favorited,
-            favoritesCount : favoritesCount,
-            author : {
-                username : 'test', //author.username,
-                bio : 'this is a test', //author.bio,
-                image : 'https://openclipart.org/download/247320/abstract-user-flat-4.svg',//author.image,
-                following : false //author.following
-            }
+            article : article
         })
-        console.log('In didMount ',this.state);
+        console.log('In state',this.state.article);
     }
 
     handleChange = (event) => {
@@ -137,7 +114,7 @@ class Article extends Component{
     }
     
     render(){
-        const {title,author,favorited,favoritesCount,tagList,body} = this.state;
+        const {title,author,favorited,favoritesCount,body} = this.state.article;
         return(
             <article>
                 <div className='article-header'>
@@ -176,7 +153,7 @@ class Article extends Component{
                     <Seperator/>
                 </div>
                 <div className='article-extra'>
-                    <Tag tagList={tagList}/>
+                    {/* <Tag tagList={tagList}/> */}
                     <div className='favorite-socials'>
     
                     </div>
@@ -219,9 +196,9 @@ class Article extends Component{
                             </div>
                         </div>
                     </div>
-                    <div className='article-comment-list'>
+                    {/* <div className='article-comment-list'>
                         <CommentList comments={this.state.comments}/>
-                    </div>
+                    </div> */}
                 </div>
             </article>
         );
