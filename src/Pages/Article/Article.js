@@ -15,7 +15,7 @@ import Seperator from '../../Components/Seperator/Seperator';
 //  1. Written on Date format function in Comment.js
 //  2. Add Edit comment button
 //  3. Link the comments author details to current user
-//  4. Fix TagList sizing
+//  4. Fix TagList sizing 
 
 
 class Article extends Component{
@@ -53,27 +53,6 @@ class Article extends Component{
 
     async componentDidMount(){
         const slug = this.props.match.params.slug;
-        // fetch(`http://localhost:3000/api/articles/${slug}`)
-        // .then(res => res.json())
-        // .then(data => {
-        //     if(data){
-        //         console.log('From data',data);
-        //         const {title, slug, description, createdAt, updatedAt, body, author} = data;
-        //         this.setState({
-        //             title : title,
-        //             slug : slug,
-        //             description : description,
-        //             createdAt : createdAt,
-        //             updatedAt : updatedAt,
-        //             body : body, 
-        //             author : {
-        //                 username : author.username,
-        //                 bio : author.bio,
-        //                 image : author.image
-        //             }
-        //         }) 
-        //     }
-        // });
         const _article = await fetch(`http://localhost:3000/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
         const article = await _article.json();
         this.setState({

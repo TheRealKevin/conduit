@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ManagementPreview from '../../Components/Management-Preview/Management-Preview';
 
 import './Article-Editor.css';
@@ -10,47 +11,32 @@ class ArticleEditor extends Component {
     constructor(props){
         super(props);
         this.state = {
-            user : {
-                name : 'Vibe Cat',
-                username : 'vibecat',
-                email : 'vibecat@mail.com'
-            },
             article : {
                   slug : '',
                   title: '',
                   description: '',
                   body: '',
-                  tagList: [],
                   createdAt: '',
                   updatedAt: '',
-                  favorited: false,
-                  favoritesCount: 0,
                   author: {
                     username: '',
                     bio: '',
-                    image: '',
-                    following: false
+                    image: ''
                   }
             }
-            // showUpdate : false
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         console.log('Props -> ',this.props);
         console.log('State before willMount -> ',this.state);
-        this.setState( (prevState) => ({
-            article : {
-                ...prevState.article,
-                title : this.props.location.state.title ? this.props.location.state.title : '',
-                description : this.props.location.state.description ? this.props.location.state.description : '',
-                body : this.props.location.state.body ? this.props.location.state.body : '',
-                tagList : this.props.location.state.tagList ? this.props.location.state.tagList : [] 
-            },
-            user : {
-                ...prevState.user
-            }
-        }))
+
+        const slug = this.props.match.params.slug;
+        const _article = await fetch(`http://localhost:3000/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
+        const article = await _article.json();
+        this.setState({
+            article : article
+        })
         console.log('State after willMount -> ',this.state);
     }
 
@@ -60,14 +46,38 @@ class ArticleEditor extends Component {
             article : {
                 ...prevState.article,
                 [name] : value
-            },
-            user : {
-                ...prevState.user
             }
         }))
+        //console.log('After handleChange',this.state.article);
+    }
+
+    handleSubmit = async () => {
+        console.log('handleSubmit clicked');
+        const { article } = this.state;
+        const { history, match } = this.props;
+        const slug = match.params.slug;
+        const token = article.author.token;
+        fetch(`http://localhost:3000/api/articles/${slug}`, {
+            method : 'PATCH',
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${token}`
+            },
+            body : JSON.stringify({article})
+        })
+        .then( res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data){
+                history.push(`/api/articles/${data.slug}`);
+            }else{
+                alert(data.errors.body[0]);
+            }
+        })
     }
 
     articleForm = () => {
+        const { title, description, body } = this.state.article;
         return(
             <div className='article-form-container'>
                 <div className='article-form-title'>
@@ -76,37 +86,34 @@ class ArticleEditor extends Component {
                 <div className='article-form'>
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>title : </label>
-                        <input onChange={this.handleChange} className='article-input' type='text' name='title' placeholder='this.state.'/>
-                    </div>
-                    <div className='article-form-content'>
-                        <label className='article-form-content-label'>slug : </label>
-                        <input onChange={this.handleChange} className='article-input' type='text' name='slug' placeholder='Enter title and replace spaces with "-"  '/>
+                        <input onChange={this.handleChange} className='article-input' value={title || ''} type='text' name='title' placeholder='title'/>
                     </div>
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>description : </label>
-                        <textarea onChange={this.handleChange} id='article-input-decription' className='article-input' type='text' name='description' placeholder='description'/>
+                        <textarea onChange={this.handleChange} id='article-input-decription' className='article-input' value={description || ''} type='text' name='description' placeholder='description'/>
                     </div>
-                    <div className='article-form-content'>
+                    {/* <div className='article-form-content'>
                         <label className='article-form-content-label'>tag-list : </label>
                         <input onChange={this.handleChange} className='article-input' type='text' name='tag-list' placeholder='tag-list'/>
-                    </div>
+                    </div> */}
                     <div className='article-form-content'>
                         <label className='article-form-content-label'>body : </label>
-                        <textarea onChange={this.handleChange} id='article-input-body' name='body'></textarea>
+                        <textarea onChange={this.handleChange} id='article-input-body' value={body || ''} name='body'/>
                     </div>
                 </div>
                 <div className='article-publish-container'>
-                    <button type='submit' className='article-publish'>Publish</button>
+                    <button type='submit' onClick={this.handleSubmit} className='article-publish'>Publish</button>
                 </div>
             </div>
         );
     }
     
     render(){
+        const { article } = this.state;
         return(
             <div className='article-editor'>
                 <div className='article-editor-title'>
-                    <p>{this.state.user.name} Article Editor</p>
+                    <p>{article.author.username} Article Editor</p>
                 </div>
                 {this.articleForm()}
             </div>

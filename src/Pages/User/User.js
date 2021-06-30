@@ -24,9 +24,7 @@ class User extends Component {
         fetch(`http://localhost:3000/api/articles?username=${username}`)
         .then(res => res.json())
         .then(articles => {
-            // console.log('endpoint hit')
             if(articles.length > 0){
-                // console.log(articles);
                 this.setState({
                     articlesCount : articles.length
                 })

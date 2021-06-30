@@ -6,7 +6,6 @@ import './App.css';
 
 
 import Footer from './Components/Footer/Footer';
-import ManagementPreview from './Components/Management-Preview/Management-Preview';
 import Navbar from './Components/Navbar/Navbar';
 import ArticleEditor from './Pages/Article-Editor/Article-Editor';
 import Article from './Pages/Article/Article';
@@ -15,8 +14,6 @@ import Landing from './Pages/Landing/Landing';
 import Signin from './Pages/Signin/Signin';
 import Signup from './Pages/Signup/Signup';
 import User from './Pages/User/User';
-
-import {setCurrentUser} from './Redux/User/User.actions';
 
 /*  NOTES  */
 
@@ -40,7 +37,7 @@ class App extends Component {
           <Route path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
           <Route exact path='/api/articles/feed' component={Feed}/>
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
-          <Route path='/api/editor' component={ArticleEditor}/>
+          <Route path='/api/editor/:slug' component={ArticleEditor}/>
           <Footer/>
         </div>
       );
