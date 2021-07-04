@@ -48,6 +48,9 @@ class Navbar extends Component {
                         <div className='options'>
                             <ul>
                                 <li className='nav-options'>
+                                    <Link to='/api/creator'>New Article</Link>
+                                </li>
+                                <li className='nav-options'>
                                     <Link to={`/api/profile/${user.username}`}>My Profile</Link>
                                 </li>
                                 <li className='nav-options'>

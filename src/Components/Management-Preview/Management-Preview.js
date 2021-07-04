@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import Tag from '../Tag/Tag';
 
 import './Management-Preview.css';
@@ -15,6 +16,25 @@ class ManagementPreview extends Component {
         var year = date.substr(0,4), day = date.substr(5,2), month = date.substr(8,2);
         // console.log(`Day ${day} , month ${month} , year ${year}`);
         return {day,month,year};
+    }
+
+    handleRemove = () => {
+        const { slug, history } = this.props;
+        const { username,token } = this.props.author;
+        console.log('props are',this.props);
+        fetch(`http://localhost:3000/api/articles/${slug}`, {
+            method : 'DELETE',
+            headers : {
+                'Content-Type' : 'application/json',
+                'Authorization' : `Token ${token}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.message === "Article deleted successfully"){
+                history.push(`/api/profile/${username}`)
+            }
+        });
     }
  
     render(){
@@ -39,7 +59,7 @@ class ManagementPreview extends Component {
                             <Link to={`/api/editor/${slug}`}>
                                 <button className='management-preview-edit'>Edit</button>
                             </Link>
-                            <button className='management-preview-edit'>Remove</button>
+                            <button onClick={this.handleRemove} className='management-preview-edit'>Remove</button>
                         </div>
                 </div>
             </div>
@@ -47,4 +67,8 @@ class ManagementPreview extends Component {
     }
 } 
 
-export default ManagementPreview;
+const mapStateToProps = state => ({
+    author : state.user.currentUser
+})
+
+export default withRouter(connect(mapStateToProps,null)(ManagementPreview));

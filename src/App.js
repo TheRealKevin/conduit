@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import {connect} from 'react-redux'
 
 import './App.css';
@@ -14,6 +14,7 @@ import Landing from './Pages/Landing/Landing';
 import Signin from './Pages/Signin/Signin';
 import Signup from './Pages/Signup/Signup';
 import User from './Pages/User/User';
+import ArticleCreator from './Pages/Article-Creator/Article-Creator';
 
 /*  NOTES  */
 
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
           <Route exact path='/api/articles/feed' component={Feed}/>
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
+          <Route path='/api/creator' component={ArticleCreator}/>
           <Route path='/api/editor/:slug' component={ArticleEditor}/>
           <Footer/>
         </div>
