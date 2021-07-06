@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import {connect} from 'react-redux'
 
 import './App.css';
@@ -15,6 +15,7 @@ import Signin from './Pages/Signin/Signin';
 import Signup from './Pages/Signup/Signup';
 import User from './Pages/User/User';
 import ArticleCreator from './Pages/Article-Creator/Article-Creator';
+import Home from './Pages/Home/Home';
 
 /*  NOTES  */
 
@@ -29,12 +30,35 @@ class App extends Component {
     
 
   render(){
+    const { user } = this.props;
       return (
         <div className="App">
-          <Navbar user={this.props.user}/>
-          <Route path='/' exact component={Landing} />
-          <Route path='/api/users/login' exact render={(props) => (<Signin {...props}/>)}/>
-          <Route path='/api/users' exact render={(props) => (<Signup {...props}/>)}/>
+          <Navbar user={user}/>
+          <Route path='/' exact render={() => 
+              user ? (
+                <Redirect to='/api/home'/>
+              ) : (
+                <Landing/>
+              )
+          }/>
+          {/* <Route path='/' exact component={Landing} /> */}
+          <Route path='/api/home' exact component={Home}/>
+          <Route path='/api/users/login' exact render={(props) => 
+              user ? (
+                <Redirect to='/api/home'/>
+              ) : (
+                <Signin {...props}/>
+              )
+          }/>
+          <Route path='/api/users' exact render={(props) => 
+              user ? (
+                <Redirect to='/api/home'/>
+              ) : (
+                <Signup {...props}/>
+              )
+          }/>
+          {/* <Route path='/api/users/login' exact render={(props) => (<Signin {...props}/>)}/> */}
+          {/* <Route path='/api/users' exact render={(props) => (<Signup {...props}/>)}/> */}
           <Route path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
           <Route exact path='/api/articles/feed' component={Feed}/>
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>

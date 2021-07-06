@@ -1,15 +1,8 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-
-import Header from '../../Components/Header/Header';
-import Footer from '../../Components/Footer/Footer';
+import { Link } from 'react-router-dom';
 
 import './Landing.css';
 import blogpic from './blogpic.jpg';
-
-// handleSubmit = () => {
-    
-// }
 
 const Landing = () => {
     return(

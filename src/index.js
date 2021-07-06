@@ -8,14 +8,14 @@ import 'tachyons';
 import './index.css';
 import App from './App';
 
-import { store} from './Redux/store';
+import { store, persistor } from './Redux/store';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-        {/* <PersistGate persistor={persistor}> */}
+        <PersistGate persistor={persistor}>
           <App />
-        {/* </PersistGate> */}
+        </PersistGate>
       </BrowserRouter>
   </Provider>,
   document.getElementById('root')
