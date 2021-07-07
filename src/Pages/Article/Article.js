@@ -93,7 +93,8 @@ class Article extends Component{
     }
     
     render(){
-        const {title,author,favorited,favoritesCount,body} = this.state.article;
+        const {title,author,body} = this.state.article;
+        const { user } = this.props;
         return(
             <article>
                 <div className='article-header'>
@@ -107,12 +108,17 @@ class Article extends Component{
                         <div className='author-details'>
                             <div className='author-info'>
                                 <h3 id='author-username'>{author.username}</h3>
-                                {author.following ? 
-                                    <div className='following-status'>
-                                        <h4 id='following'>Following</h4>
-                                    </div> 
-                                    :
-                                    <button className='sign-button' id='follow-btn'>Follow</button>
+                                <p>{author.bio}</p>
+                                {
+                                    user.username === author.username ? 
+                                        null 
+                                            :
+                                            author.following ? 
+                                        <div className='following-status'>
+                                            <h4 id='following'>Following</h4>
+                                        </div> 
+                                            :
+                                        <button className='sign-button' id='follow-btn'>Follow</button>
                                 }
                             </div>
                         </div>
@@ -140,27 +146,29 @@ class Article extends Component{
                 <div className='author-container'>
                     <div className='author-footer-details'>
                         <div className='author-details-header'>
-                            <div className='author-pic-container'>
-                                <img className='author-img' src={author.image} alt='author-img'/>
+                            <div className='author-pic'>
+                                <div className='author-pic-container'>
+                                    <img className='author-img' src={author.image} alt='author-img'/>
+                                </div>
                             </div>
-                            <div>
-                                <p id='written'>WRITTEN BY</p>
-                            </div>
-                            <div className='author-details-bio-container'>
-                                <p id='author-username'>{author.username}</p>
+                            <div className='author-details-container'>
+                                <div className='author-details'>
+                                    <p id='written'>WRITTEN BY</p>
+                                    <div className='author-details-info'>
+                                        <p id='author-username'>{author.username}</p>
+                                    </div>
+                                </div>
                                 {
-                                    author.following ?
-                                    <div className='following-status'>
-                                        <h4 onClick={this.handleFollowing} id='following'>Following</h4>
-                                    </div> 
-                                    :
-                                    <button onClick={this.handleFollowing} className='sign-button' id='follow-btn'>Follow</button>
+                                    user.username === author.username ? 
+                                        null 
+                                            :
+                                            author.following ? 
+                                        <div className='following-status'>
+                                            <h4 id='following'>Following</h4>
+                                        </div> 
+                                            :
+                                        <button className='sign-button' id='follow-btn'>Follow</button>
                                 }
-                            </div>
-                        </div>
-                        <div className='author-details-bio'>
-                            <div className='author-bio-container'>
-                                <p>{author.bio}</p>
                             </div>
                         </div>
                     </div>
@@ -185,6 +193,7 @@ class Article extends Component{
 }
 
 const mapStateToProps = state => ({
+    user : state.user.currentUser,
     article : state.article
 })
 

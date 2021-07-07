@@ -32,29 +32,31 @@ class ManagementPreview extends Component {
         .then(res => res.json())
         .then(data => {
             if(data.message === "Article deleted successfully"){
-                history.push(`/api/profile/${username}`)
+                window.location.reload()           // To refresh page and reflect changes after article is deleted
             }
         });
     }
  
     render(){
         // console.log(this.props);
-        const {title, tagList, createdAt, slug, description, body} = this.props;
+        const { title, createdAt, slug, description } = this.props;
         const date = this.getDate(createdAt);
         return(
             <div className='management-preview'>
                 <div className='management-preview-container'>
                     <Link className='management-preview-link' to={`/api/articles/${slug}`}>
                         <div className='management-preview-content-container'>
-                            <div className='management-preview-date'>
-                                <p>Published on {date.day}th {date.month}, {date.year}</p>
-                            </div>
                             <div className='management-preview-title'>
                                 {title}
                             </div>
-                            {/* <Tag className='management-preview-tag' tagList={tagList}/> */}
+                            <div className='management-preview-description'>
+                                {description}
+                            </div>
+                            <div className='management-preview-date'>
+                                <p>Published on {date.day}th {date.month}, {date.year}</p>
+                            </div>
                         </div>
-                    </Link>
+                    </Link> 
                         <div className='management-preview-edit-container'>
                             <Link to={`/api/editor/${slug}`}>
                                 <button className='management-preview-edit'>Edit</button>

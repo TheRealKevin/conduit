@@ -25,9 +25,16 @@ class Navbar extends Component {
             <nav className='navbar navbar-fixed-top'>
                 <div className='nav-container'>
                     <div className='header'>
-                        <Link className='brand navbar-brand' to='/'>
-                            Medium Clone
-                        </Link>
+                        {
+                            user ? 
+                            <Link className='brand navbar-brand' to='/api/profile/:username'>
+                                Medium Clone
+                            </Link>
+                                :
+                            <Link className='brand navbar-brand' to='/'>
+                                Medium Clone
+                            </Link>
+                        }
                     </div>
                     {!user ? 
                         <div className='options'>

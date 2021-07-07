@@ -48,27 +48,27 @@ class ArticleCreator extends Component {
 
     articleForm = () => {
         return(
-            <div className='article-form-container'>
-                <div className='article-form-title'>
-                    <p>Article Form</p>
+            <div className='form-container'>
+                <div className='form-title'>
+                    <p>Pen down and share what's on your mind</p>
                 </div>
-                <div className='article-form-content-container'>
-                    <div className='article-form-content'>
-                        <label className='article-form-content-label'>title : </label>
-                        <input onChange={this.handleChange} className='article-input' type='text' name='title' placeholder='title'/>
+                <div className='form'>
+                    <div className='form-content'>
+                        <label className='form-label'>Title</label>
+                        <input className='form-input' onChange={this.handleChange} type='text' name='title' />
                     </div>
-                    <div className='article-form-content'>
-                        <label className='article-form-content-label'>description : </label>
-                        <textarea onChange={this.handleChange} id='article-input-decription' className='article-input' type='text' name='description' placeholder='description'/>
+                    <div className='form-content'>
+                        <label className='form-label'>Description</label>
+                        <textarea className='form-input' onChange={this.handleChange} type='text' name='description'/>
                     </div>
-                    <div className='article-form-content'>
-                        <label className='article-form-content-label'>body : </label>
-                        <textarea onChange={this.handleChange} id='article-input-body' name='body'/>
+                    <div className='form-content'>
+                        <label className='form-label'>Body</label>
+                        <textarea className='form-input' onChange={this.handleChange} type='text' name='body'/>
                     </div>
                 </div>
-                <div className='article-publish-container'>
-                    <button type='submit' onClick={this.handleSubmit} className='article-publish'>Publish</button>
-                </div>
+                <div className='form-publish-container'>
+                    <button type='submit' onClick={this.handleSubmit} className='form-publish'>Publish</button>
+                </div>   
             </div>
         );
     }

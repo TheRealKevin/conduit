@@ -12,9 +12,6 @@ import './User.css';
 class User extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            articlesCount : 0
-        }
     }
 
     componentDidMount() {
@@ -52,7 +49,7 @@ class User extends Component {
                             <p>{bio}</p>
                         </div>
                     </div>
-                </div>
+                </div> 
                 <div className='user-article'>
                     <div className='user-article-title-container'>
                         <h3>Your Articles</h3>

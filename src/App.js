@@ -36,23 +36,23 @@ class App extends Component {
           <Navbar user={user}/>
           <Route path='/' exact render={() => 
               user ? (
-                <Redirect to='/api/home'/>
+                <Redirect to='/api/profile/:username'/>
               ) : (
                 <Landing/>
               )
           }/>
           {/* <Route path='/' exact component={Landing} /> */}
-          <Route path='/api/home' exact component={Home}/>
+          {/* <Route path='/api/home' exact component={Home}/> */}
           <Route path='/api/users/login' exact render={(props) => 
               user ? (
-                <Redirect to='/api/home'/>
+                <Redirect to='/api/profile/:username'/>
               ) : (
                 <Signin {...props}/>
               )
           }/>
           <Route path='/api/users' exact render={(props) => 
               user ? (
-                <Redirect to='/api/home'/>
+                <Redirect to='/api/profile/:username'/>
               ) : (
                 <Signup {...props}/>
               )
@@ -64,7 +64,7 @@ class App extends Component {
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
           <Route path='/api/creator' component={ArticleCreator}/>
           <Route path='/api/editor/:slug' component={ArticleEditor}/>
-          <Footer/>
+          {/* <Footer/> */}
         </div>
       );
     }
