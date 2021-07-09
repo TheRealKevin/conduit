@@ -37,7 +37,7 @@ class ArticleCreator extends Component {
         })
         .then( res => res.json())
         .then(data => {
-            // console.log(data);
+            console.log(data);
             if(data){
                 history.push(`/api/articles/${data.slug}`);
             }else{

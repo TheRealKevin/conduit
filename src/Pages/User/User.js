@@ -7,15 +7,45 @@ import { loadArticles } from '../../Redux/Article/Article.actions';
 import './User.css';
 
 //      FIXES
-//  1. FETCH Articles of a particular user
+//  1. When visiting another user's profile, on going to "My Profile", it doesn't render "My profile" of the current user
  
 class User extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            profile : {}
+        }
+    }
+
+    // async componentDidMount() {
+    //     const username = this.props.match.params.username;
+    //     console.log('username is',username);
+    //     const _profile = await fetch(`http://localhost:3000/api/profiles/${username}`);     // To make async code, sync and (a)wait till we get the response from the API
+    //     const profile = await _profile.json();
+    //     this.setState({
+    //         profile : profile
+    //     })
+    //     console.log('In User page, state is',this.state);
+    // }
+
+    componentDidMount() {
+        const username = this.props.match.params.username;
+        //console.log('username is',username);
+        fetch(`http://localhost:3000/api/profiles/${username}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data){
+                this.setState({
+                    profile : data
+                })
+            }else{
+                alert(data);
+            }
+        });
     }
 
     render(){
-        const {username,bio,following,image} = this.props.currentUser;
+        const {username,bio,following,image} = this.state.profile;
         // console.log('The props are',this.props)
         return(
             <div className='user'>

@@ -8,9 +8,8 @@ import Doggo from './doggo.jpg'
 const Comment = ({comment}) => {
 
     const getDate = (createdAt) => {
-        var date = createdAt;
-        var day = date.substr(0,2), month = date.substr(3,2), year = date.substr(6,2);
-        // console.log(`Day ${day} , month ${month} , year ${year}`);
+        const newDate = createdAt.split('-');
+        var day = newDate[2].substr(0,2), month = newDate[1], year = newDate[0];
         return {day,month,year};
     }
     
@@ -41,7 +40,7 @@ const Comment = ({comment}) => {
                             <a className='test' href='/api/profile/'>{author.username}</a>
                         </div> */}
                         <div className='comment-user-info-time'>
-                            <p>Written on {date.day}th {date.month} {date.year}</p>
+                            <p>Written on {date.day}-{date.month}-{date.year}</p>
                         </div>
                     </div>
                 </div>

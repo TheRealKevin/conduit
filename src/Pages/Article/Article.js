@@ -77,6 +77,7 @@ class Article extends Component{
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             if(data){
                 window.location.reload()           // To refresh page and reflect changes after article is deleted
             }
@@ -189,20 +190,6 @@ class Article extends Component{
                             </div>
                         </div>  
                 }
-                {/* <div className='article-comment'>
-                    <p id='comment'>Comments</p>
-                    <div className='article-comment-generator'>
-                        <div className='article-comment-generator-container'>
-                            <textarea onChange = {this.handleChange} id='article-comment-generator-text' name='body' type='text' placeholder='Write your thoughts ...'/>
-                            <div className='article-comment-generator-submit'>
-                                <button onClick={this.handleSubmit} className='post-button'>Post</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='article-comment-list'>
-                        <CommentList comments={this.state.comments}/>
-                    </div>
-                </div> */}
             </article>
         );
     }
