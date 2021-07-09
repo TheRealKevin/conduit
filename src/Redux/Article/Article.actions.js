@@ -5,7 +5,7 @@ export const getArticle = (article) => ({
     payload : article
 })
 
-export const loadArticles = (articles) => ({
-    type : articleActionTypes.LOAD_ARTICLES,
-    payload : articles
-})
+// export const loadArticles = (articles) => ({
+//     type : articleActionTypes.LOAD_ARTICLES,
+//     payload : articles
+// })

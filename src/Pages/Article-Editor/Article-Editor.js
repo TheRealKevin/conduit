@@ -34,7 +34,7 @@ class ArticleEditor extends Component {
         const slug = this.props.match.params.slug;
         const _article = await fetch(`http://localhost:3000/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
         const article = await _article.json();
-        console.log('article is',article);
+        // console.log('article is',article);
         this.setState({
             article : article
         })

@@ -23,6 +23,7 @@ class Article extends Component{
     constructor(props){
         super(props);
         this.state = {
+            loading : 'false',
             article : {
                 slug : '',
                 title : '',
@@ -36,20 +37,12 @@ class Article extends Component{
                     image : ''
                 }
             },
-            addComment : {
-                id : '',
-                createdAt : '',
-                updatedAt : '',
-                body : '',
-                author : {
-                    username : '',
-                    bio : '',
-                    image : '',
-                    following : false
-                }
+            comment : {
+                body : ''
             }
         }
     }
+
 
     async componentDidMount(){
         const slug = this.props.match.params.slug;
@@ -58,43 +51,47 @@ class Article extends Component{
         this.setState({
             article : article
         })
-        console.log('In state',this.state.article);
     }
 
     handleChange = (event) => {
-        // console.log('In Article -> handleChange ',this.state.addComment)
-        this.setState( (prevState) => ({
-              addComment : {...prevState.addComment,
-                            body : event.target.value
+        const { name, value } = event.target;
+        this.setState((prevState) => ({
+            ...prevState,
+            comment : {
+                [name] : value
             }
         }))
     }
 
     handleSubmit = () => {
-        if(!this.state.addComment.body){
-            alert('Oops, you might have forgotten to write the comment')
-            return;
-        }
-        console.log(this.state.addComment.body);
-        
+        const slug = this.props.match.params.slug;
+        const { token } = this.props.user;
+        const comment = this.state.comment;
+        fetch(`http://localhost:3000/api/articles/${slug}/comments`, {
+            method : 'POST',
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${token}`
+            },
+            body : JSON.stringify({comment})
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data){
+                window.location.reload()           // To refresh page and reflect changes after article is deleted
+            }
+        })
     }
 
     handleFollowing = () => {
         console.log('handleFollowing ', this.state.article.author.following)
-        // this.setState((prevState) => ({
-        //     article : {
-        //         ...prevState.article,
-        //         author : {
-        //             ...prevState.article.author,
-        //             following : !following
-        //         }
-        //     }
-        // }))
     }
     
     render(){
-        const {title,author,body} = this.state.article;
+        const {title, author, body} = this.state.article;
+        const slug = this.props.match.params.slug;
         const { user } = this.props;
+
         return(
             <article>
                 <div className='article-header'>
@@ -113,12 +110,12 @@ class Article extends Component{
                                     user.username === author.username ? 
                                         null 
                                             :
-                                            author.following ? 
-                                        <div className='following-status'>
-                                            <h4 id='following'>Following</h4>
-                                        </div> 
-                                            :
-                                        <button className='sign-button' id='follow-btn'>Follow</button>
+                                        author.following ? 
+                                            <div className='following-status'>
+                                                <h4 id='following'>Following</h4>
+                                            </div> 
+                                                :
+                                            <button className='sign-button' id='follow-btn'>Follow</button>
                                 }
                             </div>
                         </div>
@@ -173,28 +170,46 @@ class Article extends Component{
                         </div>
                     </div>
                 </div>
-                <div className='article-comment'>
+                {
+                    this.state.loading === 'true' ? 
+                        <h3>Loading</h3>
+                            :
+                        <div className='article-comment'>
+                            <p id='comment'>Comments</p>
+                            <div className='article-comment-generator'>
+                                <div className='article-comment-generator-container'>
+                                    <textarea onChange = {this.handleChange} id='article-comment-generator-text' name='body' type='text' placeholder='Write your thoughts ...'/>
+                                    <div className='article-comment-generator-submit'>
+                                        <button onClick={this.handleSubmit} className='post-button'>Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='article-comment-list'>
+                                <CommentList slug={slug}/>
+                            </div>
+                        </div>  
+                }
+                {/* <div className='article-comment'>
                     <p id='comment'>Comments</p>
                     <div className='article-comment-generator'>
                         <div className='article-comment-generator-container'>
-                            <textarea onChange = {this.handleChange} id='article-comment-generator-text' type='text' placeholder='Write your thoughts ...'/>
+                            <textarea onChange = {this.handleChange} id='article-comment-generator-text' name='body' type='text' placeholder='Write your thoughts ...'/>
                             <div className='article-comment-generator-submit'>
                                 <button onClick={this.handleSubmit} className='post-button'>Post</button>
                             </div>
                         </div>
                     </div>
-                    {/* <div className='article-comment-list'>
+                    <div className='article-comment-list'>
                         <CommentList comments={this.state.comments}/>
-                    </div> */}
-                </div>
+                    </div>
+                </div> */}
             </article>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    user : state.user.currentUser,
-    article : state.article
+    user : state.user.currentUser
 })
 
 export default connect(mapStateToProps,null)(Article);

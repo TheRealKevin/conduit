@@ -14,24 +14,9 @@ class User extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        const { loadArticles } = this.props;
-        const username = this.props.match.params.username;
-        // console.log(this.props);
-        fetch(`http://localhost:3000/api/articles?username=${username}`)
-        .then(res => res.json())
-        .then(articles => {
-            if(articles.length > 0){
-                this.setState({
-                    articlesCount : articles.length
-                })
-                loadArticles(articles);
-            }
-        })
-    }
-
     render(){
         const {username,bio,following,image} = this.props.currentUser;
+        // console.log('The props are',this.props)
         return(
             <div className='user'>
                 <div className='user-username-container'>
@@ -67,8 +52,4 @@ const mapStateToProps = state => ({
     currentUser : state.user.currentUser
 })
 
-const mapDispatchToProps = dispatch => ({
-    loadArticles : (articles) => dispatch(loadArticles(articles))
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(User);
+export default connect(mapStateToProps, null)(User);

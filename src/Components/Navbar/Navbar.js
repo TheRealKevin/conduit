@@ -27,7 +27,7 @@ class Navbar extends Component {
                     <div className='header'>
                         {
                             user ? 
-                            <Link className='brand navbar-brand' to='/api/profile/:username'>
+                            <Link className='brand navbar-brand' to='/api/home'>
                                 Medium Clone
                             </Link>
                                 :
