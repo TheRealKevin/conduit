@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ArticleManagement from '../../Components/Article-Management/Article-Management';
 
 import { loadArticles } from '../../Redux/Article/Article.actions';
@@ -45,8 +46,9 @@ class User extends Component {
     }
 
     render(){
-        const {username,bio,following,image} = this.state.profile;
-        // console.log('The props are',this.props)
+        const { username, bio, following, image } = this.state.profile;
+        const { currentUser } = this.props;
+        console.log('The profile is ',this.state.profile)
         return(
             <div className='user'>
                 <div className='user-username-container'>
@@ -55,7 +57,19 @@ class User extends Component {
                 <div className='user-container'>
                     <div className='username'>
                         <h3 id ='username-header'>{username}</h3>
-                        <p id='status'>{following ? following : null}</p>
+                        <div className='username-extras'>
+                            {
+                                currentUser.username === username ? 
+                                    <Link id='edit' to='/api/creator'>
+                                        Edit
+                                    </Link>
+                                    :
+                                    following ? 
+                                        <p id='status'>following</p>
+                                            :
+                                        <p id='status'>follow</p>
+                            }
+                        </div>
                     </div>
                     <img id='user-img'  src={image} alt='user-profile-pic'/>
                     <div className='user-info-container'>
