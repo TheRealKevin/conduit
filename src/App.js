@@ -16,6 +16,7 @@ import Signup from './Pages/Signup/Signup';
 import User from './Pages/User/User';
 import ArticleCreator from './Pages/Article-Creator/Article-Creator';
 import Home from './Pages/Home/Home';
+import UserEdit from './Pages/User-Edit/User-Edit';
 
 /*  NOTES  */
 
@@ -56,11 +57,33 @@ class App extends Component {
                 <Signup {...props}/>
               )
           }/>
-          <Route path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
+          <Route exact path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
           <Route exact path='/api/articles/feed' component={Feed}/>
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
-          <Route path='/api/creator' component={ArticleCreator}/>
-          <Route path='/api/editor/:slug' component={ArticleEditor}/>
+
+          {/* <Route path='/api/creator' component={ArticleCreator}/> */}
+          <Route path='/api/creator' exact render={(props) => 
+              user ? (
+                <ArticleCreator {...props}/>
+              ) : (
+                <Redirect to='/api/home'/>
+              )
+          }/>
+          {/* <Route path='/api/editor/:slug' component={ArticleEditor}/> */}
+          <Route path='/api/editor/:slug' exact render={(props) => 
+              user ? (
+                <ArticleEditor {...props}/>
+              ) : (
+                <Redirect to='/api/home'/>
+              )
+          }/>
+          <Route path='/api/profile/:username/edit' exact render={() => 
+              user ? (
+                <UserEdit/>
+              ) : (
+                <Redirect to='/api/home'/>
+              )
+          }/>
           {/* <Footer/> */}
         </div>
       );

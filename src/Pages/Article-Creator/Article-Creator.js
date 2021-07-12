@@ -19,7 +19,7 @@ class ArticleCreator extends Component {
         })
     }
 
-    handleSubmit = async () => {
+    handleSubmit = () => {
         const { history, author } = this.props;
         const token = author.token;
         const article = {

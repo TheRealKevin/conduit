@@ -28,7 +28,7 @@ class ArticleEditor extends Component {
     }
 
     async componentDidMount() {
-        // console.log('Props -> ',this.props);
+        console.log('Props -> ',this.props);
         // console.log('State before willMount -> ',this.state);
 
         const slug = this.props.match.params.slug;
@@ -49,10 +49,9 @@ class ArticleEditor extends Component {
                 [name] : value
             }
         }))
-        //console.log('After handleChange',this.state.article);
     }
 
-    handleSubmit = async () => {
+    handleSubmit = () => {
         console.log('handleSubmit clicked');
         const { article } = this.state;
         const { history, match } = this.props;
@@ -68,7 +67,7 @@ class ArticleEditor extends Component {
         })
         .then( res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if(data){
                 history.push(`/api/articles/${data.slug}`);
             }else{

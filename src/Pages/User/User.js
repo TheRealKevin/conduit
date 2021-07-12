@@ -48,7 +48,6 @@ class User extends Component {
     render(){
         const { username, bio, following, image } = this.state.profile;
         const { currentUser } = this.props;
-        console.log('The profile is ',this.state.profile)
         return(
             <div className='user'>
                 <div className='user-username-container'>
@@ -60,7 +59,7 @@ class User extends Component {
                         <div className='username-extras'>
                             {
                                 currentUser.username === username ? 
-                                    <Link id='edit' to='/api/creator'>
+                                    <Link id='edit' to={`/api/profile/${username}/edit`}>
                                         Edit
                                     </Link>
                                     :

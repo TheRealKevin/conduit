@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     width: 30vw;
-    height: 39vw;
+    height: 49vw;
     margin: 20px;
     border: 1px solid black;
     /* background-color: burlywood; */
@@ -90,6 +90,7 @@ label {
 /* User Articles */ 
 
 .user-article {
+    margin : 5%;
     width: 100%;
     background-color: rgb(38, 100, 158);
     display: flex;

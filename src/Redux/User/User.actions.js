@@ -9,7 +9,3 @@ export const removeCurrentUser = () => ({
     type : UserActionTypes.REMOVE_CURRENT_USER,
     payload : null
 })
-
-// export const signInUser = data => ({
-//     type : UserActionTypes
-// })
