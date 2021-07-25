@@ -1,81 +1,63 @@
 /*  HEADER */
 
+.feed {
+    background-color: coral;
+}
+
 .feed-header {      /*   The Section of the viewport dedeicate for the header   */
+    font-family: 'Dosis', sans-serif;
+    font-size: 2.5rem;
+    border-bottom: 2px solid black;
+}
+
+.feed-content-search {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    padding : 2%;
+    background-color: lightskyblue;
+}
+
+.feed-content-search-header {
+    font-family: 'Dosis', sans-serif;
+    font-size: 2rem;
+    text-decoration: underline;
+    /* background-color: lightpink; */
+}
+
+.feed-content-list {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    min-height: 100px;
-    overflow: hidden;
+    background-color: bisque;
 }
 
-.feed-header-container {    /* The container inside the dection that contains all the content */
-    border: 1px solid black;
-    margin: 15px;
-    width: 60%;
+.feed-content-list-option {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    /* background-color: paleturquoise; */
-}
-
-.feed-header-pic {
-    border: 1px solid black;
-    /* padding: 10px;     */
-}
-
-.feed-header-info {
-    border: 1px solid black; 
-    min-width: 400px;
-    overflow: hidden;   
-    display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    /* background-color: yellow;   */
+    padding : 2%;
+    /* background-color: lightblue; */
 }
 
-.feed-header-info-container {
-    border: 1px solid black;  
-    display: flex;
-    flex-direction: row;
-    /* min-width: 200px; */
-    width: 80%;
-    height: 50%;
-    padding: 10px;
-    justify-content: space-between;
-    align-items:flex-end;
-    /* background-color: teal; */
+.feed-content-list-header {
+    font-family: 'Dosis', sans-serif;
+    font-size: 2rem;
+    text-decoration: underline;
+    /* background-color: lightpink; */
 }
 
-#pic {
-    border: 2px solid black;
-    border-radius: 50%;
-    width: 30%;
-    margin: 10px;
-}
-
-#name {
-    font-size: 48px;
-    font-family: 'Martel Sans', sans-serif;
-    border: 1px solid black;
-}
-
-#followers {
-    font-family: 'Arimo', sans-serif;
-    font-size: 20px;
-    margin: 10px;
-    /* background-color: tomato; */
-}
-
-/* FEED ARTICLES */
-
-.feed-articles {
+.feed-content-AZList {
     display: flex;
     justify-content: center;
+    width: 60%;
+    padding: 2%;
+    border : 2px solid black;
+    background-color: lightseagreen;
 }
 
-.feed-articles-container {
+.feed-content-list-option2 {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding : 2rem;
+    background-color: lightgreen;
 }

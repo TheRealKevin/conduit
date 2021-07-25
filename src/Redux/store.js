@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 
 const middlewares = [logger];    // Using array, as in applyMiddleware(), we can spread the array and apply the middlewares individually
 
-const persistConfig = {
+const persistConfig = { 
     key : "root",
     storage
 }

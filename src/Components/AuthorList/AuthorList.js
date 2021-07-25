@@ -8,16 +8,13 @@ const AuthorList = ({authorList}) => {
             {
                 authorList ? 
                     authorList.map((author) => {
-                        return <Link key={author} to={`profile/${author}`}>{author}</Link>
+                        return <Link key={author} to={`profile/${author}`}>
+                            <p className='author-list-name'>{author}</p>
+                        </Link>
                     })  
                         :
                 null
             }
-
-            {/* {authorList.map((author) => {
-                console.log(author)
-                return <Link to={`api/profile/${author}`}>{author}</Link>
-            })} */}
         </div>
     );
 }

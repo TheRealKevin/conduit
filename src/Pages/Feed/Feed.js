@@ -90,12 +90,22 @@ class Feed extends Component {
                     <h3>LOADING</h3>
                         :
                     <div className='feed-content'>
-                        <div className='feed-content-search'>
-                            <SearchBox handleChange={this.handleChange}/>
-                        </div>
+                        {/* <div className='feed-content-search'>
+                            <h3 className='feed-content-search-header'>Search your favorite author</h3>
+                            <div className='feed-content-searchbar'>
+                                <SearchBox handleChange={this.handleChange}/>
+                            </div>
+                        </div> */}
                         <div className='feed-content-list'>
-                            {this.AZList()}
-                            {this.authorList()}
+                            <div className='feed-content-list-option'>
+                                <h3 className='feed-content-list-header'>Author List</h3>
+                                <div className='feed-content-AZList'>
+                                    {this.AZList()}
+                                </div>
+                            </div>
+                            <div className='feed-content-list-option2'>
+                                {this.authorList()}
+                            </div>
                         </div>
                     </div> 
                 }
