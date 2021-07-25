@@ -58,7 +58,7 @@ class App extends Component {
               )
           }/>
           <Route exact path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
-          <Route exact path='/api/articles/feed' component={Feed}/>
+          <Route exact path='/api/feed' component={Feed}/>
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
 
           {/* <Route path='/api/creator' component={ArticleCreator}/> */}

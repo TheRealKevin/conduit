@@ -1,6 +1,8 @@
 /*  HEADER */
 
 .feed-header {      /*   The Section of the viewport dedeicate for the header   */
+    display: flex;
+    flex-direction: column;
     border: 1px solid black;
     display: flex;
     justify-content: center;

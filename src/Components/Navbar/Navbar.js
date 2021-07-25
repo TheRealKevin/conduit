@@ -40,6 +40,11 @@ class Navbar extends Component {
                         <div className='options'>
                             <ul>
                                 <li className='nav-options'>
+                                    <Link to='/api/feed'>
+                                        Feed
+                                    </Link>
+                                </li>
+                                <li className='nav-options'>
                                     <Link to='/api/users/login'>
                                         Sign In
                                     </Link>
@@ -54,6 +59,11 @@ class Navbar extends Component {
                         :
                         <div className='options'>
                             <ul>
+                                <li className='nav-options'>
+                                    <Link to='/api/feed'>
+                                        Feed
+                                    </Link>
+                                </li>
                                 <li className='nav-options'>
                                     <Link to='/api/creator'>New Article</Link>
                                 </li>
