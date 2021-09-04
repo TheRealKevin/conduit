@@ -19,6 +19,26 @@ class UserEdit extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     const { token } = this.props.user;
+    //     // console.log('The token is',token);
+    //     fetch(`https://fast-stream-91986.herokuapp.com/api/user`, {
+    //         method : 'GET',
+    //         headers : {
+    //             'Authorization' :  `Token ${token}`
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data){
+    //             // console.log('In user edit, data is',data);
+    //             this.setState({
+    //                 user : data
+    //             })
+    //         }
+    //     })
+    // }
+
     componentDidMount() {
         const { token } = this.props.user;
         // console.log('The token is',token);
@@ -48,6 +68,30 @@ class UserEdit extends Component {
             }
         }))
     }
+
+    // handleSubmit = () => {
+    //     const { token } = this.props.user;
+    //     const { setCurrentUser, history } = this.props;
+    //     const { user } = this.state;
+    //     fetch(`https://fast-stream-91986.herokuapp.com/api/user`, {
+    //         method : 'PATCH',
+    //         headers : {
+    //             'Content-Type' : 'application/json',
+    //             'Authorization' : `Token ${token}`
+    //         },
+    //         body : JSON.stringify({user})
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data){
+    //             // console.log('In User Edit, fetch is',data);
+    //             setCurrentUser(data);
+    //             history.push(`/api/profile/${data.username}`);
+    //         }else{
+    //             alert(data.errors.body[0]);
+    //         }
+    //     })
+    // }
 
     handleSubmit = () => {
         const { token } = this.props.user;

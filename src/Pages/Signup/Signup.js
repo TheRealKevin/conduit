@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 
 import { setCurrentUser } from '../../Redux/User/User.actions';
 
+//      FIXES
+//  1. Error handling returns a string. So it will contain the value but also the key merged together
+
+
 class Signup extends Component {
     constructor(props){
         super(props);
@@ -23,6 +27,32 @@ class Signup extends Component {
         })
     } 
 
+    // handleSubmit = () => {
+    //     const {setCurrentUser,history} = this.props;
+
+    //     const user = {
+    //         email : this.state.email,
+    //         password : this.state.password,
+    //         username : this.state.username
+    //     }
+    //     fetch('https://fast-stream-91986.herokuapp.com/api/users',{
+    //         method : 'POST',
+    //         headers : {'Content-Type' : 'application/json'},
+    //         body : JSON.stringify({user})
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data){
+    //             console.log('In signup page',data);
+    //             setCurrentUser(data);
+    //             history.push('/')
+    //         }
+    //     })
+    //     .catch(err => {
+    //         console.log('Erro : In signup page',err);
+    //     })
+    // }
+
     handleSubmit = () => {
         const {setCurrentUser,history} = this.props;
 
@@ -36,12 +66,21 @@ class Signup extends Component {
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify({user})
         })
-        .then(res => res.json())
+        .then(res => {
+            if(res.ok){
+                return res.json();
+            }
+            return res.text().then(text => {throw new Error(text)});
+        })
         .then(data => {
             if(data){
+                console.log('In signup page',data);
                 setCurrentUser(data);
                 history.push('/')
             }
+        })
+        .catch(err => {
+            alert(err.message);
         })
     }
 

@@ -19,6 +19,33 @@ class ArticleCreator extends Component {
         })
     }
 
+    // handleSubmit = () => {
+    //     const { history, author } = this.props;
+    //     const token = author.token;
+    //     const article = {
+    //         title : this.state.title,
+    //         description : this.state.description,
+    //         body : this.state.body
+    //     }
+    //     fetch('https://fast-stream-91986.herokuapp.com/api/articles', {
+    //         method : 'POST',
+    //         headers : {
+    //             'Content-Type': 'application/json',
+    //             'Authorization' : `Token ${token}`
+    //         },
+    //         body : JSON.stringify({article})
+    //     })
+    //     .then( res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         if(data){
+    //             history.push(`/api/articles/${data.slug}`);
+    //         }else{
+    //             alert(data.errors.body[0]);
+    //         }
+    //     })
+    // }
+
     handleSubmit = () => {
         const { history, author } = this.props;
         const token = author.token;

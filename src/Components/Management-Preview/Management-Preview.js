@@ -18,6 +18,25 @@ class ManagementPreview extends Component {
         return {day,month,year};
     }
 
+    // handleRemove = () => {
+    //     const { slug, history } = this.props;
+    //     const { username,token } = this.props.author;
+    //     console.log('props are',this.props);
+    //     fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}`, {
+    //         method : 'DELETE',
+    //         headers : {
+    //             'Content-Type' : 'application/json',
+    //             'Authorization' : `Token ${token}`
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data.message === "Article deleted successfully"){
+    //             window.location.reload()           // To refresh page and reflect changes after article is deleted
+    //         }
+    //     });
+    // }
+
     handleRemove = () => {
         const { slug, history } = this.props;
         const { username,token } = this.props.author;

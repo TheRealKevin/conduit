@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 
 import { removeCurrentUser } from '../../Redux/User/User.actions';
@@ -90,4 +90,4 @@ const mapDispatchToProps = dispatch => ({
     removeCurrentUser : () => dispatch(removeCurrentUser())
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Navbar); 
+export default withRouter( connect(mapStateToProps,mapDispatchToProps)(Navbar)); 

@@ -16,6 +16,8 @@ import Signup from './Pages/Signup/Signup';
 import User from './Pages/User/User';
 import ArticleCreator from './Pages/Article-Creator/Article-Creator';
 import Home from './Pages/Home/Home';
+import ProtectedEditRoute from './Components/ProtectedEditRoute/ProtectedEditRoute';
+import ProtectedUserRoute from './Components/ProtectedUserRoute/ProtectedUserRoute';
 import UserEdit from './Pages/User-Edit/User-Edit';
 
 /*  NOTES  */
@@ -28,7 +30,6 @@ class App extends Component {
   constructor(props){
     super(props);
   }
-    
 
   render(){
     const { user } = this.props;
@@ -37,7 +38,7 @@ class App extends Component {
           <Navbar user={user}/>
           <Route path='/' exact render={() => 
               user ? (
-                <Redirect to='/api/home'/>
+                <Redirect to={`/api/profile/${user.username}`}/>
               ) : (
                 <Landing/>
               )
@@ -45,19 +46,20 @@ class App extends Component {
           <Route path='/api/home' exact component={Home}/>
           <Route path='/api/users/login' exact render={(props) => 
               user ? (
-                <Redirect to='/api/home'/>
+                <Redirect to={`/api/profile/${user.username}`}/>
               ) : (
                 <Signin {...props}/>
               )
           }/>
           <Route path='/api/users' exact render={(props) => 
               user ? (
-                <Redirect to='/api/home'/>
+                <Redirect to={`/api/profile/${user.username}`}/>
               ) : (
                 <Signup {...props}/>
               )
           }/>
-          <Route exact path='/api/profile/:username' render={(props) => (<User {...props}/>)}/>
+
+          {/* <Route exact path='/api/profile/:username' component={User}/> */}
           <Route exact path='/api/feed' component={Feed}/>
           <Route exact path='/api/articles/:slug' render={(props) => (<Article {...props}/>)}/>
 
@@ -66,24 +68,29 @@ class App extends Component {
               user ? (
                 <ArticleCreator {...props}/>
               ) : (
-                <Redirect to='/api/home'/>
+                <Redirect to='/'/>
               )
           }/>
-          {/* <Route path='/api/editor/:slug' component={ArticleEditor}/> */}
+          <Route path='/api/editor/:slug' component={ArticleEditor}/>
           <Route path='/api/editor/:slug' exact render={(props) => 
               user ? (
                 <ArticleEditor {...props}/>
               ) : (
-                <Redirect to='/api/home'/>
+                <Redirect to='/'/>
               )
           }/>
-          <Route path='/api/profile/:username/edit' exact render={() => 
+
+          <Route path='/' component={ProtectedUserRoute}/>
+          <Route path='/' component={ProtectedEditRoute}/>
+
+          {/* TO BE UNCOMMENETED  <Route path={`/api/profile/${user.username}`} render={(props) => (<User {...props}/>)}/> */}
+          {/* TO BE UNCOMMENTED <Route path={`/api/profile/${user.username}/edit`} exact render={() => 
               user ? (
                 <UserEdit/>
               ) : (
-                <Redirect to='/api/home'/>
+                <Redirect to='/'/>
               )
-          }/>
+          }/> */}
           {/* <Footer/> */}
         </div>
       );

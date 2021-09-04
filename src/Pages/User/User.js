@@ -18,20 +18,26 @@ class User extends Component {
         }
     }
 
-    // async componentDidMount() {
+    // componentDidMount() {
     //     const username = this.props.match.params.username;
-    //     console.log('username is',username);
-    //     const _profile = await fetch(`http://localhost:3000/api/profiles/${username}`);     // To make async code, sync and (a)wait till we get the response from the API
-    //     const profile = await _profile.json();
-    //     this.setState({
-    //         profile : profile
-    //     })
-    //     console.log('In User page, state is',this.state);
+    //     //console.log('username is',username);
+    //     fetch(`https://fast-stream-91986.herokuapp.com/api/profiles/${username}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data){
+    //             this.setState({
+    //                 profile : data
+    //             })
+    //         }else{
+    //             alert(data);
+    //         }
+    //     });
     // }
 
     componentDidMount() {
+        console.log('In User Page',this.props);
         const username = this.props.match.params.username;
-        //console.log('username is',username);
+        console.log('username is',username);
         fetch(`http://localhost:3000/api/profiles/${username}`)
         .then(res => res.json())
         .then(data => {
@@ -76,7 +82,7 @@ class User extends Component {
                             <label htmlFor='bio'>Bio</label>
                             <p>{bio}</p>
                         </div>
-                    </div>
+                    </div> 
                 </div> 
                 <div className='user-article'>
                     <div className='user-article-title-container'>
