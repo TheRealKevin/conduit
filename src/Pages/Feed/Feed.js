@@ -16,36 +16,8 @@ class Feed extends Component {
         }
     }
 
-    // async componentDidMount(){
-    //     await fetch('https://fast-stream-91986.herokuapp.com/api/feed')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         if(data.length > 0){
-    //             this.setState((prevState) => ({
-    //                 ...prevState,
-    //                 authors : data
-    //             }))
-    //         }
-    //     })
-    //     this.state.authors.sort();
-    //     let authors = this.state.authors.reduce((acc,curr) => {
-    //         let letter = curr.DISTINCT[0].toUpperCase();
-    //         if(!acc[letter]){
-    //             acc[letter] = []
-    //         }
-    //         acc[letter].push(curr.DISTINCT);
-    //         return acc;
-    //     },{})
-    //     this.setState({
-    //         authors : authors,
-    //         letter : 'A',
-    //         isLoading : false
-    //     })
-    //     // console.log(this.state);
-    // }
-
     async componentDidMount(){
-        await fetch('http://localhost:3000/api/feed')
+        await fetch('https://fast-stream-91986.herokuapp.com/api/feed')
         .then(res => res.json())
         .then(data => {
             if(data.length > 0){
@@ -71,6 +43,34 @@ class Feed extends Component {
         })
         // console.log(this.state);
     }
+
+    // async componentDidMount(){
+    //     await fetch('http://localhost:3000/api/feed')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data.length > 0){
+    //             this.setState((prevState) => ({
+    //                 ...prevState,
+    //                 authors : data
+    //             }))
+    //         }
+    //     })
+    //     this.state.authors.sort();
+    //     let authors = this.state.authors.reduce((acc,curr) => {
+    //         let letter = curr.DISTINCT[0].toUpperCase();
+    //         if(!acc[letter]){
+    //             acc[letter] = []
+    //         }
+    //         acc[letter].push(curr.DISTINCT);
+    //         return acc;
+    //     },{})
+    //     this.setState({
+    //         authors : authors,
+    //         letter : 'A',
+    //         isLoading : false
+    //     })
+    //     // console.log(this.state);
+    // }
 
     handleChange = (event) => {
         const { value, name } = event.target;

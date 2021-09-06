@@ -12,23 +12,23 @@ class CommentList extends Component {
         }
     }
 
-    // async componentDidMount(){
-    //     const slug = this.props.slug;
-    //     const _comments = await fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}/comments`);     // To make async code, sync and (a)wait till we get the response from the API
-    //     const comments = await _comments.json();
-    //     this.setState({
-    //         comments : comments
-    //     })
-    // }
-
     async componentDidMount(){
         const slug = this.props.slug;
-        const _comments = await fetch(`http://localhost:3000/api/articles/${slug}/comments`);     // To make async code, sync and (a)wait till we get the response from the API
+        const _comments = await fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}/comments`);     // To make async code, sync and (a)wait till we get the response from the API
         const comments = await _comments.json();
         this.setState({
             comments : comments
         })
     }
+
+    // async componentDidMount(){
+    //     const slug = this.props.slug;
+    //     const _comments = await fetch(`http://localhost:3000/api/articles/${slug}/comments`);     // To make async code, sync and (a)wait till we get the response from the API
+    //     const comments = await _comments.json();
+    //     this.setState({
+    //         comments : comments
+    //     })
+    // }
 
     render(){
         const { comments } = this.state;

@@ -44,23 +44,23 @@ class Article extends Component{
     }
 
 
-    // async componentDidMount(){
-    //     const slug = this.props.match.params.slug;
-    //     const _article = await fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
-    //     const article = await _article.json();
-    //     this.setState({
-    //         article : article
-    //     })
-    // }
-
     async componentDidMount(){
         const slug = this.props.match.params.slug;
-        const _article = await fetch(`http://localhost:3000/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
+        const _article = await fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
         const article = await _article.json();
         this.setState({
             article : article
         })
     }
+
+    // async componentDidMount(){
+    //     const slug = this.props.match.params.slug;
+    //     const _article = await fetch(`http://localhost:3000/api/articles/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
+    //     const article = await _article.json();
+    //     this.setState({
+    //         article : article
+    //     })
+    // }
 
     handleChange = (event) => {
         const { name, value } = event.target;
@@ -72,32 +72,11 @@ class Article extends Component{
         }))
     }
 
-    // handleSubmit = () => {
-    //     const slug = this.props.match.params.slug;
-    //     const { token } = this.props.user;
-    //     const comment = this.state.comment;
-    //     fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}/comments`, {
-    //         method : 'POST',
-    //         headers : {
-    //             'Content-Type': 'application/json',
-    //             'Authorization' : `Token ${token}`
-    //         },
-    //         body : JSON.stringify({comment})
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         if(data){
-    //             window.location.reload()           // To refresh page and reflect changes after article is deleted
-    //         }
-    //     })
-    // }
-
     handleSubmit = () => {
         const slug = this.props.match.params.slug;
         const { token } = this.props.user;
         const comment = this.state.comment;
-        fetch(`http://localhost:3000/api/articles/${slug}/comments`, {
+        fetch(`https://fast-stream-91986.herokuapp.com/api/articles/${slug}/comments`, {
             method : 'POST',
             headers : {
                 'Content-Type': 'application/json',
@@ -113,6 +92,27 @@ class Article extends Component{
             }
         })
     }
+
+    // handleSubmit = () => {
+    //     const slug = this.props.match.params.slug;
+    //     const { token } = this.props.user;
+    //     const comment = this.state.comment;
+    //     fetch(`http://localhost:3000/api/articles/${slug}/comments`, {
+    //         method : 'POST',
+    //         headers : {
+    //             'Content-Type': 'application/json',
+    //             'Authorization' : `Token ${token}`
+    //         },
+    //         body : JSON.stringify({comment})
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         if(data){
+    //             window.location.reload()           // To refresh page and reflect changes after article is deleted
+    //         }
+    //     })
+    // }
 
     handleFollowing = () => {
         console.log('handleFollowing ', this.state.article.author.following)

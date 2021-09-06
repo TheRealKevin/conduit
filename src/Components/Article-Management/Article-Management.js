@@ -14,22 +14,9 @@ class ArticleManagement extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     const username = this.props.match.params.username;
-    //     fetch(`https://fast-stream-91986.herokuapp.com/api/articles?username=${username}`)
-    //     .then(res => res.json())
-    //     .then(articles => {
-    //         if(articles.length > 0){
-    //             this.setState({
-    //                 articles : articles
-    //             })
-    //         }
-    //     })
-    // }
-
     componentDidMount() {
         const username = this.props.match.params.username;
-        fetch(`http://localhost:3000/api/articles?username=${username}`)
+        fetch(`https://fast-stream-91986.herokuapp.com/api/articles?username=${username}`)
         .then(res => res.json())
         .then(articles => {
             if(articles.length > 0){
@@ -39,6 +26,19 @@ class ArticleManagement extends Component {
             }
         })
     }
+
+    // componentDidMount() {
+    //     const username = this.props.match.params.username;
+    //     fetch(`http://localhost:3000/api/articles?username=${username}`)
+    //     .then(res => res.json())
+    //     .then(articles => {
+    //         if(articles.length > 0){
+    //             this.setState({
+    //                 articles : articles
+    //             })
+    //         }
+    //     })
+    // }
 
     render(){
         const { articles } = this.state;

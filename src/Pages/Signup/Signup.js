@@ -27,32 +27,6 @@ class Signup extends Component {
         })
     } 
 
-    // handleSubmit = () => {
-    //     const {setCurrentUser,history} = this.props;
-
-    //     const user = {
-    //         email : this.state.email,
-    //         password : this.state.password,
-    //         username : this.state.username
-    //     }
-    //     fetch('https://fast-stream-91986.herokuapp.com/api/users',{
-    //         method : 'POST',
-    //         headers : {'Content-Type' : 'application/json'},
-    //         body : JSON.stringify({user})
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         if(data){
-    //             console.log('In signup page',data);
-    //             setCurrentUser(data);
-    //             history.push('/')
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.log('Erro : In signup page',err);
-    //     })
-    // }
-
     handleSubmit = () => {
         const {setCurrentUser,history} = this.props;
 
@@ -61,7 +35,7 @@ class Signup extends Component {
             password : this.state.password,
             username : this.state.username
         }
-        fetch('http://localhost:3000/api/users',{
+        fetch('https://fast-stream-91986.herokuapp.com/api/users',{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify({user})
@@ -83,6 +57,37 @@ class Signup extends Component {
             alert(err.message);
         })
     }
+
+    // handleSubmit = () => {
+    //     const {setCurrentUser,history} = this.props;
+
+    //     const user = {
+    //         email : this.state.email,
+    //         password : this.state.password,
+    //         username : this.state.username
+    //     }
+    //     fetch('http://localhost:3000/api/users',{
+    //         method : 'POST',
+    //         headers : {'Content-Type' : 'application/json'},
+    //         body : JSON.stringify({user})
+    //     })
+    //     .then(res => {
+    //         if(res.ok){
+    //             return res.json();
+    //         }
+    //         return res.text().then(text => {throw new Error(text)});
+    //     })
+    //     .then(data => {
+    //         if(data){
+    //             console.log('In signup page',data);
+    //             setCurrentUser(data);
+    //             history.push('/')
+    //         }
+    //     })
+    //     .catch(err => {
+    //         alert(err.message);
+    //     })
+    // }
 
     render(){
         return(

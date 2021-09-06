@@ -25,42 +25,13 @@ class Signin extends Component {
     //     })   
     // }
 
-    // handleSubmit = () => {
-    //     const {setCurrentUser,history} = this.props;        
-    //     const user = {
-    //         email : this.state.email,
-    //         password : this.state.password
-    //     }        
-    //     fetch('https://fast-stream-91986.herokuapp.com/api/users/login',{
-    //         method : 'POST',
-    //         headers : {'Content-Type' : 'application/json'},
-    //         body : JSON.stringify({user})
-    //     })
-    //     .then( res => res.json())
-    //     .then( (data) => {
-    //         if(data.user){
-    //             setCurrentUser(data.user);
-    //             history.push('/');
-    //         }else{
-    //             alert(data.errors.body[0]);
-    //         }
-    //     })
-    // }
-
-    handleChange = (event) => {
-        const {value,name} = event.target;
-        this.setState({
-            [name] : value
-        })   
-    }
-
     handleSubmit = () => {
         const {setCurrentUser,history} = this.props;        
         const user = {
             email : this.state.email,
             password : this.state.password
         }        
-        fetch('http://localhost:3000/api/users/login',{
+        fetch('https://fast-stream-91986.herokuapp.com/api/users/login',{
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
             body : JSON.stringify({user})
@@ -75,6 +46,35 @@ class Signin extends Component {
             }
         })
     }
+
+    handleChange = (event) => {
+        const {value,name} = event.target;
+        this.setState({
+            [name] : value
+        })   
+    }
+
+    // handleSubmit = () => {
+    //     const {setCurrentUser,history} = this.props;        
+    //     const user = {
+    //         email : this.state.email,
+    //         password : this.state.password
+    //     }        
+    //     fetch('http://localhost:3000/api/users/login',{
+    //         method : 'POST',
+    //         headers : {'Content-Type' : 'application/json'},
+    //         body : JSON.stringify({user})
+    //     })
+    //     .then( res => res.json())
+    //     .then( (data) => {
+    //         if(data.user){
+    //             setCurrentUser(data.user);
+    //             history.push('/');
+    //         }else{
+    //             alert(data.errors.body[0]);
+    //         }
+    //     })
+    // }
 
     render(){
         return(

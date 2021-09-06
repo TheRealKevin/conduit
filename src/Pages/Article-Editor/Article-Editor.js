@@ -27,26 +27,12 @@ class ArticleEditor extends Component {
         }
     }
 
-    // async componentDidMount() {
-    //     console.log('Props -> ',this.props);
-    //     // console.log('State before willMount -> ',this.state);
-
-    //     const slug = this.props.match.params.slug;
-    //     const _article = await fetch(`https://fast-stream-91986.herokuapp.com/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
-    //     const article = await _article.json();
-    //     // console.log('article is',article);
-    //     this.setState({
-    //         article : article
-    //     })
-    //     // console.log('State after willMount -> ',this.state);
-    // }
-
     async componentDidMount() {
         console.log('Props -> ',this.props);
         // console.log('State before willMount -> ',this.state);
 
         const slug = this.props.match.params.slug;
-        const _article = await fetch(`http://localhost:3000/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
+        const _article = await fetch(`https://fast-stream-91986.herokuapp.com/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
         const article = await _article.json();
         // console.log('article is',article);
         this.setState({
@@ -54,6 +40,20 @@ class ArticleEditor extends Component {
         })
         // console.log('State after willMount -> ',this.state);
     }
+
+    // async componentDidMount() {
+    //     console.log('Props -> ',this.props);
+    //     // console.log('State before willMount -> ',this.state);
+
+    //     const slug = this.props.match.params.slug;
+    //     const _article = await fetch(`http://localhost:3000/${slug}`);     // To make async code, sync and (a)wait till we get the response from the API
+    //     const article = await _article.json();
+    //     // console.log('article is',article);
+    //     this.setState({
+    //         article : article
+    //     })
+    //     // console.log('State after willMount -> ',this.state);
+    // }
  
     handleChange = (event) => {
         const {value,name} = event.target;
@@ -65,38 +65,13 @@ class ArticleEditor extends Component {
         }))
     }
 
-    // handleSubmit = () => {
-    //     console.log('handleSubmit clicked');
-    //     const { article } = this.state;
-    //     const { history, match } = this.props;
-    //     const slug = match.params.slug;
-    //     const token = article.author.token;
-    //     fetch(`https://fast-stream-91986.herokuapp.com/${slug}`, {
-    //         method : 'PATCH',
-    //         headers : {
-    //             'Content-Type': 'application/json',
-    //             'Authorization' : `Token ${token}`
-    //         },
-    //         body : JSON.stringify({article})
-    //     })
-    //     .then( res => res.json())
-    //     .then(data => {
-    //         // console.log(data);
-    //         if(data){
-    //             history.push(`/api/articles/${data.slug}`);
-    //         }else{
-    //             alert(data.errors.body[0]);
-    //         }
-    //     })
-    // }
-
     handleSubmit = () => {
         console.log('handleSubmit clicked');
         const { article } = this.state;
         const { history, match } = this.props;
         const slug = match.params.slug;
         const token = article.author.token;
-        fetch(`http://localhost:3000/${slug}`, {
+        fetch(`https://fast-stream-91986.herokuapp.com/${slug}`, {
             method : 'PATCH',
             headers : {
                 'Content-Type': 'application/json',
@@ -114,6 +89,31 @@ class ArticleEditor extends Component {
             }
         })
     }
+
+    // handleSubmit = () => {
+    //     console.log('handleSubmit clicked');
+    //     const { article } = this.state;
+    //     const { history, match } = this.props;
+    //     const slug = match.params.slug;
+    //     const token = article.author.token;
+    //     fetch(`http://localhost:3000/${slug}`, {
+    //         method : 'PATCH',
+    //         headers : {
+    //             'Content-Type': 'application/json',
+    //             'Authorization' : `Token ${token}`
+    //         },
+    //         body : JSON.stringify({article})
+    //     })
+    //     .then( res => res.json())
+    //     .then(data => {
+    //         // console.log(data);
+    //         if(data){
+    //             history.push(`/api/articles/${data.slug}`);
+    //         }else{
+    //             alert(data.errors.body[0]);
+    //         }
+    //     })
+    // }
 
     articleForm = () => {
         const { title, description, body } = this.state.article;

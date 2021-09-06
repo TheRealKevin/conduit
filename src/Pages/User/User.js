@@ -18,27 +18,10 @@ class User extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     const username = this.props.match.params.username;
-    //     //console.log('username is',username);
-    //     fetch(`https://fast-stream-91986.herokuapp.com/api/profiles/${username}`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         if(data){
-    //             this.setState({
-    //                 profile : data
-    //             })
-    //         }else{
-    //             alert(data);
-    //         }
-    //     });
-    // }
-
     componentDidMount() {
-        console.log('In User Page',this.props);
         const username = this.props.match.params.username;
-        console.log('username is',username);
-        fetch(`http://localhost:3000/api/profiles/${username}`)
+        //console.log('username is',username);
+        fetch(`https://fast-stream-91986.herokuapp.com/api/profiles/${username}`)
         .then(res => res.json())
         .then(data => {
             if(data){
@@ -50,6 +33,23 @@ class User extends Component {
             }
         });
     }
+
+    // componentDidMount() {
+    //     console.log('In User Page',this.props);
+    //     const username = this.props.match.params.username;
+    //     console.log('username is',username);
+    //     fetch(`http://localhost:3000/api/profiles/${username}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if(data){
+    //             this.setState({
+    //                 profile : data
+    //             })
+    //         }else{
+    //             alert(data);
+    //         }
+    //     });
+    // }
 
     render(){
         const { username, bio, following, image } = this.state.profile;
